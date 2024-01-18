@@ -1,6 +1,6 @@
 # A - The Objective-C Language Summary
 
-Objective-C adds a small number of constructs to the C language and defines a handful of conventions for effectively interacting with the run-time system. This appendix lists all the additions to the language, but doesn't go into great detail. For more information, see [Chapter 2](http://web.archive.org/web/20051228163819/http://www.next.com/Pubs/Documents/OPENSTEP/ObjectiveC/coreobjc.htm) and [Chapter 3](http://web.archive.org/web/20051228163819/http://www.next.com/Pubs/Documents/OPENSTEP/ObjectiveC/moreobjc.htm) of this manual. For a more formal presentation of Objective-C syntax, see [Appendix B](http://web.archive.org/web/20051228163819/http://www.next.com/Pubs/Documents/OPENSTEP/ObjectiveC/grammar.htm), \`\`[Reference Manual for the Objective-C Language](http://web.archive.org/web/20051228163819/http://www.next.com/Pubs/Documents/OPENSTEP/ObjectiveC/grammar.htm),'' which follows this summary.
+Objective-C adds a small number of constructs to the C language and defines a handful of conventions for effectively interacting with the run-time system. This appendix lists all the additions to the language, but doesn't go into great detail. For more information, see [Chapter 2](2.Language.md) and [Chapter 3](3.Extensions.md) of this manual. For a more formal presentation of Objective-C syntax, see [Appendix B](B.Grammar.md), \`\`[Reference Manual for the Objective-C Language](B.Grammar.md),'' which follows this summary.
 
 
 
@@ -352,21 +352,3 @@ Likewise, protocols and categories of the same class have protected name spaces:
 
 However, class names are in the same name space as variables and defined types. A program can't have a global variable with the same name as a class.
 
-
-
-  
-
-[![](/web/20051228163819im_/http://www.toodarkpark.org/computers/objc/Images/DocsLeftArrow.gif)](runtime.html) [![](/web/20051228163819im_/http://www.toodarkpark.org/computers/objc/Images/DocsContents.gif)](objctoc.html) [![](/web/20051228163819im_/http://www.toodarkpark.org/computers/objc/Images/DocsRightArrow.gif)](grammar.html)
-
-------------------------------------------------------------------------
-
-Last Modified: 01:34am , January 19, 1996
-
-------------------------------------------------------------------------
-
-[Hot News](http://web.archive.org/web/20051228163819/http://www.next.com/HotNews/) \| [OpenStep](http://web.archive.org/web/20051228163819/http://www.next.com/OpenStep/) \| [WebObjects](http://web.archive.org/web/20051228163819/http://www.next.com/WebObjects/) \| [Services](http://web.archive.org/web/20051228163819/http://www.next.com/Services/) \| [Buy Now](http://web.archive.org/web/20051228163819/http://www.next.com/BuyNow/) \| [NeXTanswers](http://web.archive.org/web/20051228163819/http://www.next.com/NeXTanswers/) \| [Search](http://web.archive.org/web/20051228163819/http://www.next.com/Search/) \| [About NeXT](http://web.archive.org/web/20051228163819/http://www.next.com/AboutNeXT/)
-
-------------------------------------------------------------------------
-
-NeXT sales and product information inquiries? [Click here](http://web.archive.org/web/20051228163819/http://www.next.com/AboutNeXT/Feedback.html)  
-[Copyright](http://web.archive.org/web/20051228163819/http://www.next.com/Legal/) 1996 [NeXT Software, Inc.](http://web.archive.org/web/20051228163819/http://www.next.com/) [Proprietary Notices.](http://web.archive.org/web/20051228163819/http://www.next.com/Legal/)
