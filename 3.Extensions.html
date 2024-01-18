@@ -1,0 +1,1145 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="4 - The Run-Time System" href="4.Runtime.html" /><link rel="prev" title="2 - The Objective-C Language" href="2.Language.html" />
+
+    <!-- Generated with Sphinx 7.1.2 and Furo 2023.09.10 -->
+        <title>3 - The Objective-C Extensions - OPENSTEP Object-Oriented Programming and the Objective-C Language 1996 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">OPENSTEP Object-Oriented Programming and the Objective-C Language 1996 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">OPENSTEP Object-Oriented Programming and the Objective-C Language 1996 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="0.Introduction.html">0 - Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1.ObjectOrientedProgramming.html">1 - Object-Oriented Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2.Language.html">2 - The Objective-C Language</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">3 - The Objective-C Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4.Runtime.html">4 - The Run-Time System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="A.Summary.html">A - The Objective-C Language Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="B.Grammar.html">B - Reference Manual for the Objective-C Language</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="the-objective-c-extensions">
+<h1>3 - The Objective-C Extensions<a class="headerlink" href="#the-objective-c-extensions" title="Permalink to this heading">#</a></h1>
+<p>The preceding chapter has all you need to know about Objective-C to define classes and design programs in the language. It covers basic Objective-C syntax and explains the messaging process in detail.</p>
+<p>Class definitions are at the heart of object-oriented programming, but they’re not the only mechanism for structuring object definitions in Objective-C. This chapter discusses two other ways of declaring methods and associating them with a class:</p>
+<ul class="simple">
+<li><p>Categories can compartmentalize a class definition or extend an existing one.</p></li>
+<li><p>Protocols declare methods that can be implemented by any class.</p></li>
+</ul>
+<p>The chapter also explains how static typing works and takes up some lesser used features of Objective-C, including ways to temporarily overcome its inherent dynamism.</p>
+<section id="categories">
+<h2>Categories<a class="headerlink" href="#categories" title="Permalink to this heading">#</a></h2>
+<p>You can add methods to a class by declaring them in an interface file under a category name and defining them in an implementation file under the same name. The category name indicates that the methods are additions to a class declared elsewhere, not a new class.</p>
+<p>A category can be an alternative to a subclass. Rather than define a subclass to extend an existing class, through a category you can add methods to the class directly. For example, you could add categories to NSArray and other OPENSTEP classes. As in the case of a subclass, you don’t need source code for the class you’re extending.</p>
+<p>The methods the category adds become part of the class type. For example, methods added to the NSArray class in a category will be among the methods the compiler will expect an NSArray instance to have in its repertoire. Methods added to the NSArray class in a subclass would not be included in the NSArray type. (This matters only for statically typed objects, since static typing is the only way the compiler can know an object’s class.)</p>
+<p>Category methods can do anything that methods defined in the class proper can do. At run time, there’s no difference. The methods the category adds to the class are inherited by all the class’s subclasses, just like other methods.</p>
+</section>
+<section id="adding-to-a-class">
+<h2>Adding to a Class<a class="headerlink" href="#adding-to-a-class" title="Permalink to this heading">#</a></h2>
+<p>The declaration of a category interface looks very much like a class interface declaration–except the category name is listed within parentheses after the class name and the superclass isn’t mentioned. The category must import the interface file for the class it extends:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#import &quot;ClassName.h&quot;
+
+
+
+@interface ClassName ( CategoryName )
+
+method declarations
+
+@end
+</pre></div>
+</div>
+<p>The implementation, as usual, imports its own interface. Assuming that interface and implementation files are named after the category, a category implementation looks like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#import &quot;CategoryName.h&quot;
+
+
+
+@implementation ClassName ( CategoryName )
+
+method definitions
+
+@end
+</pre></div>
+</div>
+<p>Note that a category can’t declare any new instance variables for the class; it includes only methods. However, all instance variables within the scope of the class are also within the scope of the category. That includes all instance variables declared by the class, even ones declared <strong>&#64;private</strong>.</p>
+<p>declared in the class interface. However, it cannot reliably override methods declared in another category of the same class. A category is not a substitute for a subclass. It’s best if categories don’t attempt to redefine methods the class defines elsewhere; a class shouldn’t define the same method more than once.</p>
+<p>Note: When a category overrides an inherited method, the new version can, as usual, incorporate the inherited version through a message to <strong>super</strong>. But there’s no way for a category method to incorporate a method with the same name defined for the same class.</p>
+</section>
+<section id="how-catergories-are-used">
+<h2>How Catergories are used<a class="headerlink" href="#how-catergories-are-used" title="Permalink to this heading">#</a></h2>
+<p>Categories can be used to extend classes defined by other implementors–for example, you can add methods to the classes defined in the OPENSTEP frameworks. The added methods will be inherited by subclasses and will be indistinguishable at run time from the original methods of the class.</p>
+<p>Categories can also be used to distribute the implementation of a new class into separate source files–for example, you could group the methods of a large class into several categories and put each category in a different file. When used like this, categories can benefit the development process in a number of ways:</p>
+<ul class="simple">
+<li><p>They provide a simple way of grouping related methods. Similar methods defined in different classes can be kept together in the same source file.</p></li>
+<li><p>They simplify the management of a large class when more than one developer is contributing to the class definition.</p></li>
+<li><p>They let you achieve some of the benefits of incremental compilation for a very large class.</p></li>
+<li><p>They can help improve locality of reference for commonly used methods.</p></li>
+<li><p>They enable you to configure a class differently for different applications, without having to maintain different versions of the same source code.</p></li>
+</ul>
+<p>Categories are also used to declare informal protocols, as discussed under ``<a class="reference internal" href="#moreobjc.html#787"><span class="xref myst">PROTOCOLS</span></a>’’ below.</p>
+</section>
+<section id="categories-of-the-root-class">
+<h2>Categories of the Root Class<a class="headerlink" href="#categories-of-the-root-class" title="Permalink to this heading">#</a></h2>
+<p>A category can add methods to any class, including the root class. Methods added to NSObject become available to all classes that are linked to your code. While this can be useful at times, it can also be quite dangerous. Although it may seem that the modifications the category makes are well understood and of limited impact, inheritance gives them a wide scope. You may be making unintended changes to unseen classes; you may not know all the consequences of what you’re doing. Moreover, others who are unaware of your changes won’t understand what they’re doing.</p>
+<p>In addition, there are two other considerations to keep in mind when implementing methods for the root class:</p>
+<ul class="simple">
+<li><p>Messages to <strong>super</strong> are invalid (there is no superclass).</p></li>
+<li><p>Class objects can perform instance methods defined in the root class.</p></li>
+</ul>
+<p>Normally, class objects can perform only class methods. But instance methods defined in the root class are a special case. They define an interface to the run-time system that all objects inherit. Class objects are full-fledged objects and need to share the same interface.</p>
+<p>This feature means that you need to take into account the possibility that an instance method you define in a category of the NSObject class might be performed not only by instances but by class objects as well. For example, within the body of the method, <strong>self</strong> might mean a class object as well as an instance. See the NSObject class specification in the <em>Foundation Framework Reference</em> for more information on class access to root instance methods.</p>
+</section>
+<section id="protocols">
+<h2>Protocols<a class="headerlink" href="#protocols" title="Permalink to this heading">#</a></h2>
+<p>Class and category interfaces declare methods that are associated with a particular class–mainly methods that the class implements. Informal and formal <em>protocols</em>, on the other hand, declare methods not associated with a class, but which any class, and perhaps many classes, might implement.</p>
+<p>A protocol is simply a list of method declarations, unattached to a class definition. For example, these methods that report user actions on the mouse could be gathered into a protocol:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- (void)mouseDown:(NSEvent *)theEvent;
+
+- (void)mouseDragged:(NSEvent *)theEvent;
+
+- (void)mouseUp:(NSEvent *)theEvent;
+</pre></div>
+</div>
+<p>Any class that wanted to respond to mouse events could adopt the protocol and implement its methods.</p>
+<p>Protocols free method declarations from dependency on the class hierarchy, so they can be used in ways that classes and categories cannot. Protocols list methods that are (or may be) implemented somewhere, but the identity of the class that implements them is not of interest. What is of interest is whether or not a particular class <em>conforms</em> to the protocol–whether it has implementations of the methods the protocol declares. Thus objects can be grouped into types not just on the basis of similarities due to the fact that they inherit from the same class, but also on the basis of their similarity in conforming to the same protocol. Classes in unrelated branches of the inheritance hierarchy might be typed alike because they conform to the same protocol.</p>
+<p>Protocols can play a significant role in object-oriented design, especially where a project is divided among many implementors or it incorporates objects developed in other projects. OPENSTEP software uses them heavily to support interprocess communication through Objective-C messages.</p>
+<p>However, an Objective-C program doesn’t need to use protocols. Unlike class definitions and message expressions, they’re optional. Some OPENSTEP frameworks use them; some don’t. It all depends on the task at hand.</p>
+</section>
+<section id="how-protocols-are-used">
+<h2>How Protocols are used<a class="headerlink" href="#how-protocols-are-used" title="Permalink to this heading">#</a></h2>
+<p>Protocols are useful in at least three different situations:</p>
+<ul class="simple">
+<li><p>To declare methods that others are expected to implement</p></li>
+<li><p>To declare the interface to an object while concealing its class</p></li>
+<li><p>To capture similarities among classes that are not hierarchically related</p></li>
+</ul>
+<p>The following sections discuss these situations and the roles protocols can play.</p>
+<section id="methods-for-others-to-implement">
+<h3>Methods for Others to Implement<a class="headerlink" href="#methods-for-others-to-implement" title="Permalink to this heading">#</a></h3>
+<p>If you know the class of an object, you can look at its interface declaration (and the interface declarations of the classes it inherits from) to find what messages it responds to. These declarations advertise the messages it can receive. Protocols provide a way for it to also advertise the messages it sends.</p>
+<p>Communication works both ways; objects send messages as well as receive them. For example, an object might delegate responsibility for a certain operation to another object, or it may on occasion simply need to ask another object for information. In some cases, an object might be willing to notify other objects of its actions so that they can take whatever collateral measures might be required.</p>
+<p>If you develop the class of the sender and the class of the receiver as part of the same project (or if someone else has supplied you with the receiver and its interface file), this communication is easily coordinated. The sender simply imports the interface file of the receiver. The imported file declares the method selectors the sender uses in the messages it sends.</p>
+<p>However, if you develop an object that sends messages to objects that aren’t yet defined–objects that you’re leaving for others to implement–you won’t have the receiver’s interface file. You need another way to declare the methods you use in messages but don’t implement. A protocol serves this purpose. It informs the compiler about methods the class uses and also informs other implementors of the methods they need to define to have their objects work with yours.</p>
+<p>Suppose, for example, that you develop an object that asks for the assistance of another object by sending it <strong>helpOut:</strong> and other messages. You provide an <strong>assistant</strong> instance variable to record the outlet for these messages and define a companion method to set the instance variable. This method lets other objects register themselves as potential recipients of your object’s messages:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- setAssistant:anObject
+
+{
+
+    assistant = anObject;
+
+    return self;
+
+}
+</pre></div>
+</div>
+<p>Then, whenever a message is to be sent to the <strong>assistant</strong>, a check is made to be sure that the receiver implements a method that can respond:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- (BOOL)doWork
+
+{
+
+    . . .
+
+
+
+    if ( [assistant respondsTo:@selector(helpOut:)] ) {
+
+        [assistant helpOut:self];
+
+        return YES;
+
+    }
+
+    return NO;
+
+}
+</pre></div>
+</div>
+<p>Since, at the time you write this code, you can’t know what kind of object might register itself as the <strong>assistant</strong>, you can only declare a protocol for the <strong>helpOut:</strong> method; you can’t import the interface file of the class that implements it.</p>
+</section>
+<section id="anonymous-objects">
+<h3>Anonymous Objects<a class="headerlink" href="#anonymous-objects" title="Permalink to this heading">#</a></h3>
+<p>A protocol can also be used to declare the methods of an <em>anonymous</em> object, an object of unknown class. An anonymous object may represent a service or handle a limited set of functions, especially where only one object of its kind is needed. (Objects that play a fundamental role in defining an application’s architecture and objects that you must initialize before using are not good candidates for anonymity.)</p>
+<p>Objects can’t be anonymous to their developers, of course, but they can be anonymous when the developer supplies them to someone else. For example, an anonymous object might be part of a framework or be located in a remote process:</p>
+<ul>
+<li><p>Someone who supplies a framework or a suite of objects for others to use can include objects that are not identified by a class name or an interface file. Lacking the name and class interface, users have no way of creating instances of the class. Instead, the supplier must provide a ready-made instance. Typically, a method in another class returns a usable object:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>id formatter = [receiver formattingService];
+</pre></div>
+</div>
+<p>The object returned by the method is an object without a class identity, at least not one the supplier is willing to reveal. For it to be of any use at all, the supplier must be willing to identify at least some of the messages that it can respond to. This is done by associating the object with a list of methods declared in a protocol.</p>
+</li>
+<li><p>It’s possible to send Objective-C messages to <em>remote objects</em>–objects in other applications. (The next section, ``<a class="reference internal" href="#moreobjc.html#904"><span class="xref myst">REMOTE MESSAGING</span></a>,’’ discusses this possibility in more detail.)</p>
+<p>Each application has its own structure, classes, and internal logic. But you don’t need to know how another application works or what its components are to communicate with it. As an outsider, all you need to know is what messages you can send (the protocol) and where to send them (the receiver).
+An application that publishes one of its objects as a potential receiver of remote messages must also publish a protocol declaring the methods the object will use to respond to those messages. It doesn’t have to disclose anything else about the object. The sending application doesn’t need to know the class of the object or use the class in its own design. All it needs is the protocol.</p>
+</li>
+</ul>
+<p>Protocols make anonymous objects possible. Without a protocol, there would be no way to declare an interface to an object without identifying its class.</p>
+<p>Note: Even though the supplier of an anonymous object won’t reveal its class, the object itself will reveal it at run time. A <strong>class</strong> message will return the anonymous object’s class. The class object can then be queried with the <strong>name</strong> and <strong>superclass</strong> methods. However, there’s usually little point in discovering this extra information; the information in the protocol is sufficient.</p>
+</section>
+<section id="non-hierarchical-similarities">
+<h3>Non-hierarchical Similarities<a class="headerlink" href="#non-hierarchical-similarities" title="Permalink to this heading">#</a></h3>
+<p>If more than one class implements a set of methods, those classes are often grouped under an abstract class that declares the methods they have in common. Each subclass may reimplement the methods in its own way, but the inheritance hierarchy and the common declaration in the abstract class captures the essential similarity between the subclasses.</p>
+<p>However, sometimes it’s not possible to group common methods in an abstract class. Classes that are unrelated in most respects might nevertheless need to implement some similar methods. This limited similarity may not justify a hierarchical relationship. For example, many different kinds of classes might implement methods to facilitate reference counting (this is just an example, since the Foundation Framework already implements reference counting for you):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- setRefCount:(int)count;
+
+- (int)refCount;
+
+- incrementCount;
+
+- decrementCount;
+</pre></div>
+</div>
+<p>These methods could be grouped into a protocol and the similarity between implementing classes accounted for by noting that they all conform to the same protocol.</p>
+<p>Objects can be typed by this similarity (the protocols they conform to), rather than by their class. For example, an NSMatrix must communicate with the objects that represent its cells. The NSMatrix could require each of these objects to be a kind of NSCell (a type based on class) and rely on the fact that all objects that inherit from the NSCell class will have the methods needed to respond to NSMatrix messages. Alternatively, the NSMatrix could require objects representing cells to have methods that can respond to a particular set of messages (a type based on protocol). In this case, the NSMatrix wouldn’t care what class a cell object belonged to, just that it implemented the methods.</p>
+</section>
+</section>
+<section id="informal-protocols">
+<h2>Informal Protocols<a class="headerlink" href="#informal-protocols" title="Permalink to this heading">#</a></h2>
+<p>The simplest way of declaring a protocol is to group the methods in a category declaration:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@interface NSObject ( RefCounting )
+
+- setRefCount:(int)count;
+
+- (int)refCount;
+
+- incrementCount;
+
+- decrementCount;
+
+@end
+</pre></div>
+</div>
+<p>Informal protocols are typically declared as categories of the NSObject class, since that broadly associates the method names with any class that inherits from NSObject. Since all classes inherit from the root class, the methods aren’t restricted to any part of the inheritance hierarchy. (It would also be possible to declare an informal protocol as a category of another class to limit it to a certain branch of the inheritance hierarchy, but there is little reason to do so.)</p>
+<p>When used to declare a protocol, a category interface doesn’t have a corresponding implementation. Instead, classes that implement the protocol declare the methods again in their own interface files and define them along with other methods in their implementation files.</p>
+<p>An informal protocol bends the rules of category declarations to list a group of methods but not associate them with any particular class or implementation.</p>
+<p>Being informal, protocols declared in categories don’t receive much language support. There’s no type checking at compile time nor a check at run time to see whether an object conforms to the protocol. To get these benefits, you must use a formal protocol.</p>
+</section>
+<section id="formal-pprotocols">
+<h2>Formal Pprotocols<a class="headerlink" href="#formal-pprotocols" title="Permalink to this heading">#</a></h2>
+<p>The Objective-C language provides a way to formally declare a list of methods as a protocol. Formal protocols are supported by the language and the run-time system. For example, the compiler can check for types based on protocols, and objects can introspect at run time to report whether or not they conform to a protocol.</p>
+<p>Formal protocols are declared with the <strong>&#64;protocol</strong> directive:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@protocol ProtocolName
+
+method declarations
+
+@end
+</pre></div>
+</div>
+<p>For example, the reference-counting protocol could be declared like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@protocol ReferenceCounting
+
+- setRefCount:(int)count;
+
+- (int)refCount;
+
+- incrementCount;
+
+- decrementCount;
+
+@end
+</pre></div>
+</div>
+<p>Unlike class names, protocol names don’t have global visibility. They live in their own name space.</p>
+<p>A class is said to <em>adopt</em> a formal protocol if it agrees to implement the methods the protocol declares. Class declarations list the names of adopted protocols within angle brackets after the superclass name:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@interface ClassName : ItsSuperclass 
+
+&lt; protocol list &gt;
+</pre></div>
+</div>
+<p>Categories adopt protocols in much the same way:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@interface ClassName ( CategoryName ) 
+
+&lt; protocol list &gt;
+</pre></div>
+</div>
+<p>Names in the protocol list are separated by commas.</p>
+<p>A class or category that adopts a protocol must import the header file where the protocol is declared. The methods declared in the adopted protocol are not declared elsewhere in the class or category interface.</p>
+<p>It’s possible for a class to simply adopt protocols and declare no other methods. For example, this class declaration,</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@interface Formatter : NSObject &lt; Formatting, Prettifying &gt;
+
+@end
+</pre></div>
+</div>
+<p>adopts the Formatting and Prettifying protocols, but declares no instance variables or methods of its own.</p>
+<p>A class or category that adopts a protocol is obligated to implement all the methods the protocol declares. The compiler will issue a warning if it does not. The Formatter class above would define all the methods declared in the two protocols it adopts, in addition to any it might have declared itself.</p>
+<p>Adopting a protocol is similar in some ways to declaring a superclass. Both assign methods to the new class. The superclass declaration assigns it inherited methods; the protocol assigns it methods declared in the protocol list.</p>
+<section id="protocol-objects">
+<h3>Protocol Objects<a class="headerlink" href="#protocol-objects" title="Permalink to this heading">#</a></h3>
+<p>Just as classes are represented at run time by class objects and methods by selector codes, formal protocols are represented by a special data type–instances of the Protocol class. Source code that deals with a protocol (other than to use it in a type specification) must refer to the Protocol object.</p>
+<p>In many ways, protocols are similar to class definitions. They both declare methods, and at run time they’re both represented by objects–classes by class objects and protocols by Protocol objects. Like class objects, Protocol objects are created automatically from the definitions and declarations found in source code and are used by the run-time system. They’re not allocated and initialized in program source code.</p>
+<p>Source code can refer to a Protocol object using the <strong>&#64;protocol()</strong> directive–the same directive that declares a protocol, except that here it has a set of trailing parentheses. The parentheses enclose the protocol name:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Protocol *counter = @protocol(ReferenceCounting);
+</pre></div>
+</div>
+<p>This is the only way that source code can conjure up a Protocol object. Unlike a class name, a protocol name doesn’t designate the object–except inside <strong>&#64;protocol()</strong>.</p>
+<p>The compiler creates a Protocol object for each protocol declaration it encounters, but only if the protocol is also:</p>
+<ul class="simple">
+<li><p>Adopted by a class, or</p></li>
+<li><p>Referred to somewhere in source code (using <strong>&#64;protocol()</strong>).</p></li>
+</ul>
+<p>Protocols that are declared but not used (except for type checking as described below) aren’t represented by Protocol objects.</p>
+</section>
+<section id="conforming-to-a-protocol">
+<h3>Conforming to a Protocol<a class="headerlink" href="#conforming-to-a-protocol" title="Permalink to this heading">#</a></h3>
+<p>A class is said to <em>conform</em> to a formal protocol if it adopts the protocol or inherits from a class that adopts it. An instance of a class is said to conform to the same set of protocols its class conforms to.</p>
+<p>Since a class must implement all the methods declared in the protocols it adopts, and those methods are inherited by its subclasses, saying that a class or an instance conforms to a protocol is tantamount to saying that it has in its repertoire all the methods that the protocol declares.</p>
+<p>It’s possible to check whether an object conforms to a protocol by sending it a <strong>conformsTo:</strong> message.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if ( [receiver conformsTo:@protocol(ReferenceCounting)] )
+
+[receiver incrementCount];
+</pre></div>
+</div>
+<p>The <strong>conformsTo:</strong> test is very much like the <strong>respondsTo:</strong> test for a single method, except that it tests whether a protocol has been adopted (and presumably all the methods it declares implemented) rather than just whether one particular method has been implemented. Because it checks for a whole list of methods, <strong>conformsTo:</strong> can be more efficient than <strong>respondsTo:</strong>.</p>
+<p>The <strong>conformsTo:</strong> test is also very much like the <strong>isKindOf:</strong> test, except that it tests for a type based on a protocol rather than a type based on the inheritance hierarchy.</p>
+</section>
+<section id="type-checking">
+<h3>Type Checking<a class="headerlink" href="#type-checking" title="Permalink to this heading">#</a></h3>
+<p>Type declarations for objects can be extended to include formal protocols. Protocols thus offer the possibility of another level of type checking by the compiler, one that’s more abstract since it’s not tied to particular implementations.</p>
+<p>In a type declaration, protocol names are listed between angle brackets after the type name:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- (id &lt;Formatting&gt;)formattingService;
+
+id &lt;ReferenceCounting, AutoFreeing&gt; anObject;
+</pre></div>
+</div>
+<p>Just as static typing permits the compiler to test for a type based on the class hierarchy, this syntax permits the compiler to test for a type based on conformance to a protocol.</p>
+<p>For example, if Formatter is an abstract class, this declaration</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Formatter *anObject;
+</pre></div>
+</div>
+<p>groups all objects that inherit from Formatter into a type and permits the compiler to check assignments against that type.</p>
+<p>Similarly, this declaration,</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>id &lt;Formatting&gt; anObject;
+</pre></div>
+</div>
+<p>groups all objects that conform to the Formatting protocol into a type, regardless of their positions in the class hierarchy. The compiler can check to be sure that only objects that conform to the protocol are assigned to the type.</p>
+<p>In each case, the type groups similar objects–either because they share a common inheritance, or because they converge on a common set of methods.</p>
+<p>The two types can be combined in a single declaration:</p>
+<p>id &lt;Formatting&gt; anObject;</p>
+<p>Protocols can’t be used to type class objects. Only instances can be statically typed to a protocol, just as only instances can be statically typed to a class. (However, at run time, both classes and instances will respond to a <strong>conformsTo:</strong> message.)</p>
+</section>
+<section id="protocols-within-protocols">
+<h3>Protocols within Protocols<a class="headerlink" href="#protocols-within-protocols" title="Permalink to this heading">#</a></h3>
+<p>One protocol can incorporate others using the same syntax that classes use to adopt a protocol:</p>
+<p>&#64;protocol <em>ProtocolName</em> &lt; <em>protocol list</em></p>
+<p>All the protocols listed between angle brackets are considered part of the <em>ProtocolName</em> protocol. For example, if the Paging protocol incorporates the Formatting protocol,</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@protocol Paging &lt; Formatting &gt;
+</pre></div>
+</div>
+<p>any object that conforms to the Paging protocol will also conform to Formatting. Type declarations</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>id &lt;Paging&gt; someObject;
+</pre></div>
+</div>
+<p>and <strong>conformsTo:</strong> messages</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>if ( [anotherObject conformsTo:@protocol(Paging)] )
+
+    . . .
+</pre></div>
+</div>
+<p>need mention only the Paging protocol to test for conformance to Formatting as well.</p>
+<p>When a class adopts a protocol, it must implement the methods the protocol declares, as mentioned earlier. In addition, it must conform to any protocols the adopted protocol incorporates. If an incorporated protocol incorporates still other protocols, the class must also conform to them. A class can conform to an incorporated protocol by either:</p>
+<ul class="simple">
+<li><p>Implementing the methods the protocol declares, or</p></li>
+<li><p>Inheriting from a class that adopts the protocol and implements the methods.</p></li>
+</ul>
+<p>Suppose, for example, that the Pager class adopts the Paging protocol. If Pager is a subclass of NSObject,</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@interface Pager : NSObject &lt; Paging &gt;
+</pre></div>
+</div>
+<p>it must implement all the Paging methods, including those declared in the incorporated Formatting protocol. It adopts the Formatting protocol along with Paging.</p>
+<p>On the other hand, if Pager is a subclass of Formatter (a class that independently adopts the Formatting protocol),</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@interface Pager : Formatter &lt; Paging &gt;
+</pre></div>
+</div>
+<p>it must implement all the methods declared in the Paging protocol proper, but not those declared in Formatting. Pager inherits conformance to the Formatting protocol from Formatter.</p>
+</section>
+<section id="referring-to-other-protocols">
+<h3>Referring to Other Protocols<a class="headerlink" href="#referring-to-other-protocols" title="Permalink to this heading">#</a></h3>
+<p>When working on complex applications, you occasionally find yourself writing code that looks like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#import &quot;B.h&quot;
+
+
+
+@protocol A
+
+- Foo:(id &lt;B&gt;)anObject;
+
+@end
+</pre></div>
+</div>
+<p>where protocol B is declared like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#import &quot;A.h&quot;
+
+
+
+@protocol B
+
+- Bar:(id &lt;A&gt;)anObject;
+
+@end
+</pre></div>
+</div>
+<p>In such a situation, circularity results and neither file will compile correctly. To break this recursive cycle, you must use the <strong>&#64;protocol</strong> directive to make a forward reference to the needed protocol instead of importing the interface file where the protocol is defined. The following code excerpt illustrates how you would do this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@protocol B;
+
+
+
+@protocol A
+
+- Foo:(id &lt;B&gt;)anObject;
+
+@end
+</pre></div>
+</div>
+<p>Note that using the <strong>&#64;protocol</strong> directive in this manner simply informs the compiler that ``B’’ is a protocol to be defined later. It doesn’t import the interface file where protocol B is defined.</p>
+</section>
+</section>
+<section id="remote-messaging">
+<h2>Remote Messaging<a class="headerlink" href="#remote-messaging" title="Permalink to this heading">#</a></h2>
+<p>Like most other programming languages, Objective-C was initially designed for programs that are executed as a single process in a single address space.</p>
+<p>Nevertheless, the object-oriented model, where communication takes place between relatively self-contained units through messages that are resolved at run-time, would seem well suited for interprocess communication as well. It’s not hard to imagine Objective-C messages between objects that reside in different address spaces (that is, in different tasks) or in different threads of execution of the same task.</p>
+<p>For example, in a typical server-client interaction, the client task might send its requests to a designated object in the server, and the server might target specific client objects for the notifications and other information it sends.</p>
+<p>Or imagine an interactive application that needs to do a good deal of computation to carry out a user command. It could simply put up an attention panel telling the user to wait while it was busy, or it could isolate the processing work in a subordinate task, leaving the main part of the application free to accept user input. Objects in the two tasks would communicate through Objective-C messages.</p>
+<p>Similarly, several separate processes could cooperate on the editing of a single document. There could be a different editing tool for each type of data in the document. One task might be in charge of presenting a unified user interface on-screen and of sorting out which user instructions were the responsibility of which editing tool. Each cooperating task could be written in Objective-C, with Objective-C messages being the vehicle of communication between the user interface and the tools and between one tool and another.</p>
+</section>
+<section id="distributed-objects">
+<h2>Distributed Objects<a class="headerlink" href="#distributed-objects" title="Permalink to this heading">#</a></h2>
+<p>Remote messaging in Objective-C requires a run-time system that can establish connections between objects in different address spaces, recognize when a message is intended for a remote address, and transfer data from one address space to another. It must also mediate between the separate schedules of the two tasks; it has to hold messages until their remote receivers are free to respond to them.</p>
+<p>OPENSTEP includes a <em>distributed objects</em> architecture that is essentially this kind of extension to the run-time system. Using distributed objects, you can send Objective-C messages to objects in other tasks or have messages executed in other threads of the same task. (When remote messages are sent between two threads of the same task, the threads are treated exactly like threads in different tasks.)</p>
+<p>To send a remote message, an application must first establish a connection with the remote receiver. Establishing the connection gives the application a proxy for the remote object in its own address space. It then communicates with the remote object through the proxy. The proxy assumes the identity of the remote object; it has no identity of its own. The application is able to regard the proxy as if it were the remote object; for most purposes, it <em>is</em> the remote object.</p>
+<p>Remote messaging is diagrammed below, where object A communicates with object B through a proxy, and messages for B wait in a queue until B is ready to respond to them:</p>
+<p><img alt="" src="/web/20051228152411im_/http://www.toodarkpark.org/computers/objc/Images/HTML_Art/MESSAG2.GIF" /> The sender and receiver are in different tasks and are scheduled independently of each other. So there’s no guarantee that the receiver will be free to accept a message when the sender is ready to send it. Therefore, arriving messages are placed in a queue and retrieved at the convenience of the receiving application.</p>
+<p>A proxy doesn’t act on behalf of the remote object or need access to its class. It isn’t a copy of the object, but a lightweight substitute for it. In a sense, it’s transparent; it simply passes the messages it receives on to the remote receiver and manages the interprocess communication. Its main function is to provide a local address for an object that wouldn’t otherwise have one.</p>
+<p>A remote receiver is typically anonymous. Its class is hidden inside the remote application. The sending application doesn’t need to know how that application is designed or what classes it uses. It doesn’t need to use the same classes itself. All it needs to know is what messages the remote object responds to.</p>
+<p>Because of this, an object that’s designated to receive remote messages typically advertises its interface in a formal protocol. Both the sending and the receiving application declare the protocol–they both import the same protocol declaration. The receiving application declares it because the remote object must conform to the protocol. The sending application declares it to inform the compiler about the messages it sends and because it may use the <strong>conformsTo:</strong> method and the <strong>&#64;protocol()</strong> directive to test the remote receiver. The sending application doesn’t have to implement any of the methods in the protocol; it declares the protocol only because it initiates messages to the remote receiver.</p>
+<p>The distributed objects architecture, including the NSProxy and NSConnection classes, is documented in the <em>Foundation Framework Reference</em>.</p>
+</section>
+<section id="language-support">
+<h2>Language Support<a class="headerlink" href="#language-support" title="Permalink to this heading">#</a></h2>
+<p>Remote messaging raises not only a number of intriguing possibilities for program design, it also raises some interesting issues for the Objective-C language. Most of the issues are related to the efficiency of remote messaging and the degree of separation that the two tasks should maintain while they’re communicating with each other.</p>
+<p>So that programmers can give explicit instructions about the intent of a remote message, Objective-C defines six type qualifiers that can be used when declaring methods inside a formal protocol:</p>
+<p>oneway<br />
+in<br />
+out<br />
+inout<br />
+bycopy<br />
+byref</p>
+<p>These modifiers are restricted to formal protocols; they can’t be used inside class and category declarations. However, if a class or category adopts a protocol, its implementation of the protocol methods can use the same modifiers that are used to declare the methods.</p>
+<p>The following sections explain how these modifiers are used.</p>
+<section id="synchronous-and-asynchronous-messages">
+<h3>Synchronous and Asynchronous Messages<a class="headerlink" href="#synchronous-and-asynchronous-messages" title="Permalink to this heading">#</a></h3>
+<p>Consider first a method with just a simple return value:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- (BOOL)canDance;
+</pre></div>
+</div>
+<p>When a <strong>canDance</strong> message is sent to a receiver in the same application, the method is invoked and the return value provided directly to the sender. But when the receiver is in a remote application, two underlying messages are required–one message to get the remote object to invoke the method, and the other message to send back the result of the remote calculation. This is illustrated in the figure below:</p>
+<p><img alt="" src="/web/20051228152411im_/http://www.toodarkpark.org/computers/objc/Images/HTML_Art/MESSAG3.GIF" /> Most remote messages will be, at bottom, two-way (or ``round trip’’) remote procedure calls (RPCs) like this one. The sending application waits for the receiving application to invoke the method, complete its processing, and send back an indication that it has finished, along with any return information requested. Waiting for the receiver to finish, even if no information is returned, has the advantage of coordinating the two communicating applications, of keeping them both ``in sync.’’ For this reason, round-trip messages are often called synchronous. Synchronous messages are the default.</p>
+<p>However, it’s not always necessary or a good idea to wait for a reply. Sometimes it’s sufficient simply to dispatch the remote message and return, allowing the receiver to get to the task when it will. In the meantime, the sender can go on to other things. Objective-C provides a return type modifier, <strong>oneway</strong>, to indicate that a method is used only for <em>asynchronous</em> messages:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- (oneway void)waltzAtWill;
+</pre></div>
+</div>
+<p>Although <strong>oneway</strong> is a type qualifier (like <strong>const</strong>) and can be used in combination with a specific type name, such as <strong>oneway float</strong> or <strong>oneway id</strong>, the only such combination that makes any sense is <strong>oneway void</strong>. An asynchronous message can’t have a valid return value.</p>
+</section>
+<section id="pointer-arguments">
+<h3>Pointer Arguments<a class="headerlink" href="#pointer-arguments" title="Permalink to this heading">#</a></h3>
+<p>Next, consider methods that take pointer arguments. A pointer can be used to pass information to the receiver by reference. When invoked, the method looks at what’s stored in the address it’s passed.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- setTune:(struct tune *)aSong
+
+{
+
+    tune = *aSong;
+
+    . . .
+
+}
+</pre></div>
+</div>
+<p>The same sort of argument can also be used to return information by reference. The method uses the pointer to find where it should place information requested in the message.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- getTune:(struct tune *)theSong
+
+{
+
+    . . .
+
+    *theSong = tune;
+
+}
+</pre></div>
+</div>
+<p>The way the pointer is used makes a difference in how the remote message is carried out. In neither case can the pointer simply be passed to the remote object unchanged; it points to a memory location in the sender’s address space and would not be meaningful in the address space of the remote receiver. The run-time system for remote messaging must make some adjustments behind the scenes.</p>
+<p>If the argument is used to pass information by reference, the run-time system must dereference the pointer, ship the value it points to over to the remote application, store the value in an address local to that application, and pass that address to the remote receiver.</p>
+<p>If, on the other hand, the pointer is used to return information by reference, the value it points to doesn’t have to be sent to the other application. Instead, a value from the other application must be sent back and written into the location indicated by the pointer.</p>
+<p>In the one case, information is passed on the first leg of the round trip. In the other case, information is returned on the second leg of the round trip. Because these cases result in very different actions on the part of the run-time system for remote messaging, Objective-C provides type modifiers that can clarify the programmer’s intention:</p>
+<ul>
+<li><p>The type modifier <strong>in</strong> indicates that information is being passed in a message:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- setTune:(in struct tune *)aSong;
+</pre></div>
+</div>
+</li>
+<li><p>The modifier <strong>out</strong> indicates that an argument is being used to return information by reference:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- getTune:(out struct tune *)theSong;
+</pre></div>
+</div>
+</li>
+<li><p>A third modifier, <strong>inout</strong>, indicates that an argument is used both to provide information and to get information back:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- adjustTune:(inout struct tune *)aSong;
+</pre></div>
+</div>
+</li>
+</ul>
+<p>The OPENSTEP distributed objects system takes <strong>inout</strong> to be the default modifier for all pointer arguments except those declared <strong>const</strong>, for which <strong>in</strong> is the default. <strong>inout</strong> is the safest assumption, but also the most time-consuming since it requires passing information in both directions. The only modifier that makes sense for arguments passed by value (non-pointers) is <strong>in</strong>. While <strong>in</strong> can be used with any kind of argument, <strong>out</strong> and <strong>inout</strong> make sense only for pointers.</p>
+<p>In C, pointers are sometimes used to represent composite values. For example, a string is represented as a character pointer (<strong>char *</strong>). Although in notation and implementation there’s a level of indirection here, in concept there’s not. Conceptually, a string is an entity in and of itself, not a pointer to something else.</p>
+<p>In cases like this, the distributed objects system automatically dereferences the pointer and passes whatever it points to as if by value. Therefore, the <strong>out</strong> and <strong>inout</strong> modifiers make no sense with simple character pointers. It takes an additional level of indirection in a remote message to pass or return a string by reference:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- getTuneTitle:(out char **)theTitle;
+</pre></div>
+</div>
+<p>The same is true of objects:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- adjustRectangle:(inout Rectangle **)theRect;
+</pre></div>
+</div>
+<p>These conventions are enforced at run time, not by the compiler.</p>
+</section>
+<section id="proxies-and-copies">
+<h3>Proxies and Copies<a class="headerlink" href="#proxies-and-copies" title="Permalink to this heading">#</a></h3>
+<p>Finally, consider a method that takes an object as an argument:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- danceWith:(id)aPartner;
+</pre></div>
+</div>
+<p>A <strong>danceWith:</strong> message passes an object <strong>id</strong> to the receiver. If the sender and receiver are in the same application, they would both be able to refer to the same <em>aPartner</em> object.</p>
+<p>This is true even if the receiver is in a remote application, except that the receiver will need to refer to the object through a proxy (since the object isn’t in its address space). The pointer that <strong>danceWith:</strong> delivers to a remote receiver is actually a pointer to the proxy. Messages sent to the proxy would be passed across the connection to the real object and any return information would be passed back to the remote application.</p>
+<p>There are times when proxies may be unnecessarily inefficient, when it’s better to send a copy of the object to the remote process so that it can interact with it directly in its own address space. To give programmers a way to indicate that this is intended, Objective-C provides a <strong>bycopy</strong> type modifier:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- danceWith:(bycopy id)aClone;
+</pre></div>
+</div>
+<p><strong>bycopy</strong> can also be used for return values:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- (bycopy)dancer;
+</pre></div>
+</div>
+<p>It can similarly be used with <strong>out</strong> to indicate that an object returned by reference should be copied rather than delivered in the form of a proxy:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- getDancer:(bycopy out id *)theDancer;
+</pre></div>
+</div>
+<p>Note: When a copy of an object is passed to another application, it cannot be anonymous. The application that receives the object must have the class of the object loaded in its address space.</p>
+<p><strong>bycopy</strong> makes so much sense for certain classes–classes that are intended to contain a collection of other objects, for instance–that often these classes are written so that a copy is sent to a remote receiver, instead of the usual reference. You can override this behavior with <strong>byref</strong>, however, thereby specifying that objects passed into or out of a method should all be passed by reference. Since passing by reference is the default behavior for the vast majority of Objective-C objects, you will rarely, if ever, make use of the <strong>byref</strong> keyword.</p>
+<p>The only type that it makes sense for <strong>bycopy</strong> or <strong>byref</strong> to modify is an object, whether dynamically typed <strong>id</strong> or statically typed by a class name.</p>
+<p>Although <strong>bycopy</strong> and <strong>byref</strong> can’t be used inside class and category declarations, they can be used within formal protocols. For instance, you could write a formal protocol <strong>foo</strong> as follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@Protocol foo
+
+    - (bycopy)array;
+
+@end
+</pre></div>
+</div>
+<p>A class or category can then adopt your protocol <strong>foo</strong>. This allows you to construct protocols so that they provide ``hints’’ as to how objects should be passed and returned by the methods described by the protocol.</p>
+</section>
+</section>
+<section id="static-options">
+<h2>Static Options<a class="headerlink" href="#static-options" title="Permalink to this heading">#</a></h2>
+<p>Objective-C objects are dynamic entities. As many decisions about them as possible are pushed from compile time to run time:</p>
+<ul class="simple">
+<li><p>The memory for objects is <em>dynamically allocated</em> at run time by class methods that create new instances.</p></li>
+<li><p>Objects are <em>dynamically typed</em>. In source code (at compile time), any object can be of type <strong>id</strong> no matter what its class. The exact class of an <strong>id</strong> variable (and therefore its particular methods and data structure) isn’t determined until the program is running.</p></li>
+<li><p>Messages and methods are <em>dynamically bound</em>, as described under ``<a class="reference internal" href="#coreobjc.html#"><span class="xref myst">HOW MESSAGING WORKS</span></a>’’ in the previous chapter. A run-time procedure matches the method selector in the message to a method implementation that ``belongs to’’ the receiver.</p></li>
+</ul>
+<p>These features give object-oriented programs a great deal of flexibility and power, but there’s a price to pay. Messages are somewhat slower than function calls, for example, (though not much slower due to the efficiency of the run-time system) and the compiler can’t check the exact types (classes) of <strong>id</strong> variables.</p>
+<p>To permit better compile-time type checking, and to make code more self-documenting, Objective-C allows objects to be statically typed with a class name rather than generically typed as <strong>id</strong>. It also lets you turn some of its object-oriented features off in order to shift operations from run time back to compile time.</p>
+</section>
+<section id="static-typing">
+<h2>Static Typing<a class="headerlink" href="#static-typing" title="Permalink to this heading">#</a></h2>
+<p>If a pointer to a class name is used in place of <strong>id</strong> in an object declaration,</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Rectangle  *thisObject;
+</pre></div>
+</div>
+<p>the compiler restricts the declared variable to be either an instance of the class named in the declaration or an instance of a class that inherits from the named class. In the example above, <strong>thisObject</strong> can only be a Rectangle of some kind.</p>
+<p>Statically typed objects have the same internal data structures as objects declared to be <strong>id</strong>s. The type doesn’t affect the object; it affects only the amount of information given to the compiler about the object and the amount of information available to those reading the source code.</p>
+<p>Static typing also doesn’t affect how the object is treated at run time. Statically typed objects are dynamically allocated by the same class methods that create instances of type <strong>id</strong>. If Square is a subclass of Rectangle, the following code would still produce an object with all the instance variables of a Square, not just those of a Rectangle:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Rectangle  *thisObject = [[Square alloc] init];
+</pre></div>
+</div>
+<p>Messages sent to statically typed objects are dynamically bound, just as objects typed <strong>id</strong> are. The exact type of a statically typed receiver is still determined at run time as part of the messaging process. A <strong>display</strong> message sent to <strong>thisObject</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[thisObject display];
+</pre></div>
+</div>
+<p>will perform the version of the method defined in the Square class, not its Rectangle superclass.</p>
+<p>By giving the compiler more information about an object, static typing opens up possibilities that are absent for objects typed <strong>id</strong>:</p>
+<ul class="simple">
+<li><p>In certain situations, it allows for compile-time type checking.</p></li>
+<li><p>It can free objects from the restriction that identically named methods must have identical return and argument types.</p></li>
+<li><p>It permits you to use the structure pointer operator to directly access an object’s instance variables.</p></li>
+</ul>
+<p>The first two topics are discussed in the sections below. The third was covered in the previous chapter under ``<a class="reference internal" href="#coreobjc.html#"><span class="xref myst">DEFINING A CLASS</span></a>.’’</p>
+<section id="id1">
+<h3>Type Checking<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>With the additional information provided by static typing, the compiler can deliver better type-checking services in two situations:</p>
+<ul class="simple">
+<li><p>When a message is sent to a statically typed receiver, the compiler can check to be sure that the receiver can respond. A warning is issued if the receiver doesn’t have access to the method named in the message.</p></li>
+<li><p>When a statically typed object is assigned to a statically typed variable, the compiler can check to be sure that the types are compatible. A warning is issued if they’re not.</p></li>
+</ul>
+<p>An assignment can be made without warning provided the class of the object being assigned is identical to, or inherits from, the class of the variable receiving the assignment. This is illustrated in the example below.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Shape    *aShape;
+
+Rectangle  *aRect;
+
+
+
+aRect = [[Rectangle alloc] init];
+
+aShape = aRect;
+</pre></div>
+</div>
+<p>Here <strong>aRect</strong> can be assigned to <strong>aShape</strong> because a Rectangle is a kind of Shape–the Rectangle class inherits from Shape. However, if the roles of the two variables are reversed and <strong>aShape</strong> is assigned to <strong>aRect</strong>, the compiler will generate a warning; not every Shape is a Rectangle. (For reference, see the figure in the previous chapter that shows the class hierarchy including Shape and Rectangle.)</p>
+<p>There’s no check when the expression on either side of the assignment operator is an <strong>id</strong>. A statically typed object can be freely assigned to an <strong>id</strong>, or an <strong>id</strong> to a statically typed object. Because methods like <strong>alloc</strong> and <strong>init</strong> return <strong>id</strong>s, the compiler doesn’t check to be sure that a compatible object is returned to a statically typed variable. The following code is error-prone, but is allowed nonetheless:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Rectangle  *aRect;
+
+aRect = [[Shape alloc] init];
+</pre></div>
+</div>
+<p>Note: This is consistent with the implementation of <strong>void *</strong> (pointer to <strong>void</strong>) in ANSI C. Just as <strong>void *</strong> is a generic pointer that eliminates the need for coercion in assignments between pointers, <strong>id</strong> is a generic pointer to objects that eliminates the need for coercion to a particular class in assignments between objects.</p>
+</section>
+<section id="return-and-argument-types">
+<h3>Return and Argument Types<a class="headerlink" href="#return-and-argument-types" title="Permalink to this heading">#</a></h3>
+<p>In general, methods that share the same selector (the same name) must also share the same return and argument types. This constraint is imposed by dynamic binding. Because the class of a message receiver, and therefore class-specific details about the method it’s asked to perform, can’t be known at compile time, the compiler must treat all methods with the same name alike. When it prepares information on method return and argument types for the run-time system, it creates just one method description for each method selector.</p>
+<p>However, when a message is sent to a statically typed object, the class of the receiver is known by the compiler. The compiler has access to class-specific information about the methods. Therefore, the message is freed from the restrictions on its return and argument types.</p>
+</section>
+<section id="static-typing-to-an-inherited-class">
+<h3>Static Typing to an Inherited Class<a class="headerlink" href="#static-typing-to-an-inherited-class" title="Permalink to this heading">#</a></h3>
+<p>An instance can be statically typed to its own class or to any class that it inherits from. All instances, for example, can be statically typed as NSObjects.</p>
+<p>However, the compiler understands the class of a statically typed object only from the class name in the type designation, and it does its type checking accordingly. Typing an instance to an inherited class can therefore result in discrepancies between what the compiler thinks would happen at run time and what will actually happen.</p>
+<p>For example, if you statically type a Rectangle instance as a Shape,</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Shape *myRect = [[Rectangle alloc] init];
+</pre></div>
+</div>
+<p>the compiler will treat it as a Shape. If you send the object a message to perform a Rectangle method,</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>BOOL solid = [myRect isFilled];
+</pre></div>
+</div>
+<p>the compiler will complain. The <strong>siFilled</strong> method is defined in the Rectangle class, not in Shape.</p>
+<p>However, if you send it a message to perform a method that the Shape class knows about,</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[myRect display];
+</pre></div>
+</div>
+<p>the compiler won’t complain, even though Rectangle overrides the method. At run time, Rectangle’s version of the method will be performed.</p>
+<p>Similarly, suppose that the Upper class declares a <strong>worry</strong> method that returns a <strong>double</strong>,</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- (double)worry;
+</pre></div>
+</div>
+<p>and the Middle subclass of Upper overrides the method and declares a new return type:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- (int)worry;
+</pre></div>
+</div>
+<p>If an instance is statically typed to the Upper class, the compiler will think that its <strong>worry</strong> method returns a <strong>double</strong>, and if an instance is typed to the Middle class, it will think that <strong>worry</strong> returns an <strong>int</strong>. Errors will obviously result if a Middle instance is typed to the Upper class. The compiler will inform the run-time system that a <strong>worry</strong> message sent to the object will return a double, but at run time it will actually return an <strong>int</strong> and generate an error.</p>
+<p>Static typing can free identically named methods from the restriction that they must have identical return and argument types, but it can do so reliably only if the methods are declared in different branches of the class hierarchy.</p>
+</section>
+</section>
+<section id="getting-a-method-address">
+<h2>Getting a Method Address<a class="headerlink" href="#getting-a-method-address" title="Permalink to this heading">#</a></h2>
+<p>The only way to circumvent dynamic binding is to get the address of a method and call it directly as if it were a function. This might be appropriate on the rare occasions when a particular method will be performed many times in succession and you want to avoid the overhead of messaging each time the method is performed.</p>
+<p>With a method defined in the NSObject class, <strong>methodForSelector:</strong>, you can ask for a pointer to the procedure that implements a method, then use the pointer to call the procedure. The pointer that <strong>methodForSelector:</strong> returns must be carefully cast to the proper function type. Both return and argument types should be included in the cast.</p>
+<p>The example below shows how the procedure that implements the <strong>setFilled:</strong> method might be called:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>void (*setter)(id, SEL, BOOL);
+
+int  i;
+
+
+
+setter = (void (*)(id, SEL, BOOL))[target
+
+    methodForSelector:@selector(setFilled:)];
+
+for ( i = 0; i &lt; 1000, i++ )
+
+    setter(targetList[i], @selector(setFilled:), True);
+</pre></div>
+</div>
+<p>The first two arguments passed to the procedure are the receiving object (<strong>self</strong>) and the method selector (<strong>_cmd</strong>). These arguments are hidden in method syntax but must be made explicit when the method is called as a function.</p>
+<p>Using <strong>methodForSelector:</strong> to circumvent dynamic binding saves most of the time required by messaging. However, the savings will be significant only where a particular message will be repeated many times, as in the <strong>for</strong> loop shown above.</p>
+<p>Note that <strong>methodForSelector:</strong> is provided by the run-time system; it’s not a feature of the Objective-C language itself.</p>
+</section>
+<section id="getting-an-object-data-structure">
+<h2>Getting an Object Data Structure<a class="headerlink" href="#getting-an-object-data-structure" title="Permalink to this heading">#</a></h2>
+<p>A fundamental tenet of object-oriented programming is that the data structure of an object is private to the object. Information stored there can be accessed only through messages sent to the object. However, there’s a way to strip an object data structure of its ``objectness’’ and treat it like any other C structure. This makes all the object’s instance variables publicly available.</p>
+<p>When given a class name as an argument, the <strong>&#64;defs()</strong> directive produces the declaration list for an instance of the class. This list is useful only in declaring structures, so <strong>&#64;defs()</strong> can appear only in the body of a structure declaration. This code, for example, declares a structure that would be identical to the template for an instance of the Worker class:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>struct workerDef {
+
+    @defs(Worker)
+
+} *public;
+</pre></div>
+</div>
+<p>Here <strong>public</strong> is declared as a pointer to a structure that’s essentially indistinguishable from a Worker instance. With a little help from a type cast, a Worker <strong>id</strong> can be assigned to the pointer. The object’s instance variables can then be accessed publicly through the pointer:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>id  aWorker;
+
+aWorker = [[Worker alloc] init];
+
+
+
+public = (struct workerDef *)aWorker;
+
+public-&gt;boss = nil;
+</pre></div>
+</div>
+<p>This technique of turning an object into a structure makes all of its instance variables public, no matter whether they were declared <strong>&#64;private</strong>, <strong>&#64;protected</strong>, or <strong>&#64;public</strong>.</p>
+<p>Objects generally aren’t designed with the expectation that they’ll be turned into C structures. You may want to use <strong>&#64;defs()</strong> for classes you define entirely yourself, but it should not be applied to classes found in a library or to classes you define that inherit from library classes.</p>
+</section>
+<section id="type-encoding">
+<h2>Type Encoding<a class="headerlink" href="#type-encoding" title="Permalink to this heading">#</a></h2>
+<p>To assist the run-time system, the compiler encodes the return and argument types for each method in a character string and associates the string with the method selector. The coding scheme it uses might also be of use in other contexts and so is made publicly available with the <strong>&#64;encode()</strong> directive. When given a type specification, <strong>&#64;encode()</strong> returns a string encoding that type. The type can be a basic type such as an <strong>int</strong>, a pointer, a tagged structure or union, or a class name–anything, in fact, that can be used as an argument to the C <strong>sizeof()</strong> operator.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>char  *buf1 = @encode(int **);
+
+char  *buf2 = @encode(struct key);
+
+char  *buf3 = @encode(Rectangle);
+</pre></div>
+</div>
+<p>The table below lists the type codes. Note that many of them overlap with the codes used in writing to a typed stream. However, there are codes listed here that you can’t use when writing to a typed stream and there are codes that you may want to use when writing to a typed stream that aren’t generated by <strong>&#64;encode()</strong>. (See the <em>Foundation Framework Reference</em> for information on typed streams.)</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Code</strong></p></td>
+<td><p><strong>Meaning</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>c</p></td>
+<td><p>A char</p></td>
+</tr>
+<tr class="row-even"><td><p>i</p></td>
+<td><p>A int</p></td>
+</tr>
+<tr class="row-odd"><td><p>s</p></td>
+<td><p>A short</p></td>
+</tr>
+<tr class="row-even"><td><p>l</p></td>
+<td><p>A long</p></td>
+</tr>
+<tr class="row-odd"><td><p>q</p></td>
+<td><p>A long long</p></td>
+</tr>
+<tr class="row-even"><td><p>C</p></td>
+<td><p>An unsigned char</p></td>
+</tr>
+<tr class="row-odd"><td><p>I</p></td>
+<td><p>An unsigned int</p></td>
+</tr>
+<tr class="row-even"><td><p>L</p></td>
+<td><p>An unsigned long</p></td>
+</tr>
+<tr class="row-odd"><td><p>Q</p></td>
+<td><p>An unsigned long long</p></td>
+</tr>
+<tr class="row-even"><td><p>f</p></td>
+<td><p>A float</p></td>
+</tr>
+<tr class="row-odd"><td><p>d</p></td>
+<td><p>A double</p></td>
+</tr>
+<tr class="row-even"><td><p>v</p></td>
+<td><p>A void</p></td>
+</tr>
+<tr class="row-odd"><td><p>*</p></td>
+<td><p>A charactrer string (char*)</p></td>
+</tr>
+<tr class="row-even"><td><p>&#64;</p></td>
+<td><p>An object (whether statically typed or typed id)</p></td>
+</tr>
+<tr class="row-odd"><td><p>#</p></td>
+<td><p>A class objec (Class)</p></td>
+</tr>
+<tr class="row-even"><td><p>:</p></td>
+<td><p>A method selector (SEL)</p></td>
+</tr>
+<tr class="row-odd"><td><p>[…]</p></td>
+<td><p>An array</p></td>
+</tr>
+<tr class="row-even"><td><p>{…}</p></td>
+<td><p>A structure</p></td>
+</tr>
+<tr class="row-odd"><td><p>(…)</p></td>
+<td><p>A union</p></td>
+</tr>
+<tr class="row-even"><td><p>b<em>num</em></p></td>
+<td><p>A bitfield of <em>num</em> bits</p></td>
+</tr>
+<tr class="row-odd"><td><p>^<em>type</em></p></td>
+<td><p>A pointer to <em>type</em></p></td>
+</tr>
+<tr class="row-even"><td><p>?</p></td>
+<td><p>An unkown type</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The type specification for an array is enclosed within square brackets; the number of elements in the array is specified immediately after the open bracket, before the array type. For example, an array of 12 pointers to <strong>float</strong>s would be encoded as:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[12^f]
+</pre></div>
+</div>
+<p>Structures are specified within braces, and unions within parentheses. The structure tag is listed first, followed by an equal sign and the codes for the fields of the structure listed in sequence. For example, this structure,</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>typedef struct example {
+
+    id anObject;
+
+    char *aString;
+
+    int anInt;
+
+} Example;
+</pre></div>
+</div>
+<p>would be encoded like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{example=@*i}
+</pre></div>
+</div>
+<p>The same encoding results whether the defined type name (<strong>Example</strong>) or the structure tag (<strong>example</strong>) is passed to <strong>&#64;encode()</strong>. The encoding for a structure pointer carries the same amount of information about the structure’s fields:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>^{example=@*i}
+</pre></div>
+</div>
+<p>However, another level of indirection removes the internal type specification:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>^^{example}
+</pre></div>
+</div>
+<p>Objects are treated like structures. For example, passing the NSObject class name to &#64;encode() yields this encoding:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{NSObject=#}
+</pre></div>
+</div>
+<p>The NSObject class declares just one instance variable, <strong>isa</strong>, of type Class.</p>
+<p>Note: Although the <strong>&#64;encode()</strong> directive doesn’t return them, the run-time system also uses these additional encodings for type qualifiers when they’re used to declare methods in a protocol:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Code</strong></p></td>
+<td><p><strong>Meaning</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>r</p></td>
+<td><p>const</p></td>
+</tr>
+<tr class="row-even"><td><p>n</p></td>
+<td><p>in</p></td>
+</tr>
+<tr class="row-odd"><td><p>N</p></td>
+<td><p>inout</p></td>
+</tr>
+<tr class="row-even"><td><p>o</p></td>
+<td><p>out</p></td>
+</tr>
+<tr class="row-odd"><td><p>O</p></td>
+<td><p>bycopy</p></td>
+</tr>
+<tr class="row-even"><td><p>R</p></td>
+<td><p>byref</p></td>
+</tr>
+<tr class="row-odd"><td><p>V</p></td>
+<td><p>oneway</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><a class="reference internal" href="#coreobjc.html"><span class="xref myst"><img alt="" src="/web/20051228152411im_/http://www.toodarkpark.org/computers/objc/Images/DocsLeftArrow.gif" /></span></a> <a class="reference internal" href="#objctoc.html"><span class="xref myst"><img alt="" src="/web/20051228152411im_/http://www.toodarkpark.org/computers/objc/Images/DocsContents.gif" /></span></a> <a class="reference internal" href="#runtime.html"><span class="xref myst"><img alt="" src="/web/20051228152411im_/http://www.toodarkpark.org/computers/objc/Images/DocsRightArrow.gif" /></span></a></p>
+<hr class="docutils" />
+<p>Last Modified: 01:27am , January 19, 1996</p>
+<hr class="docutils" />
+<p><a class="reference external" href="http://web.archive.org/web/20051228152411/http://www.next.com/HotNews/">Hot News</a> | <a class="reference external" href="http://web.archive.org/web/20051228152411/http://www.next.com/OpenStep/">OpenStep</a> | <a class="reference external" href="http://web.archive.org/web/20051228152411/http://www.next.com/WebObjects/">WebObjects</a> | <a class="reference external" href="http://web.archive.org/web/20051228152411/http://www.next.com/Services/">Services</a> | <a class="reference external" href="http://web.archive.org/web/20051228152411/http://www.next.com/BuyNow/">Buy Now</a> | <a class="reference external" href="http://web.archive.org/web/20051228152411/http://www.next.com/NeXTanswers/">NeXTanswers</a> | <a class="reference external" href="http://web.archive.org/web/20051228152411/http://www.next.com/Search/">Search</a> | <a class="reference external" href="http://web.archive.org/web/20051228152411/http://www.next.com/AboutNeXT/">About NeXT</a></p>
+<hr class="docutils" />
+<p>NeXT sales and product information inquiries? <a class="reference external" href="http://web.archive.org/web/20051228152411/http://www.next.com/AboutNeXT/Feedback.html">Click here</a><br />
+<a class="reference external" href="http://web.archive.org/web/20051228152411/http://www.next.com/Legal/">Copyright</a> 1996 <a class="reference external" href="http://web.archive.org/web/20051228152411/http://www.next.com/">NeXT Software, Inc.</a> <a class="reference external" href="http://web.archive.org/web/20051228152411/http://www.next.com/Legal/">Proprietary Notices.</a></p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="4.Runtime.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">4 - The Run-Time System</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="2.Language.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">2 - The Objective-C Language</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 1996, NeXT Software, Inc.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">3 - The Objective-C Extensions</a><ul>
+<li><a class="reference internal" href="#categories">Categories</a></li>
+<li><a class="reference internal" href="#adding-to-a-class">Adding to a Class</a></li>
+<li><a class="reference internal" href="#how-catergories-are-used">How Catergories are used</a></li>
+<li><a class="reference internal" href="#categories-of-the-root-class">Categories of the Root Class</a></li>
+<li><a class="reference internal" href="#protocols">Protocols</a></li>
+<li><a class="reference internal" href="#how-protocols-are-used">How Protocols are used</a><ul>
+<li><a class="reference internal" href="#methods-for-others-to-implement">Methods for Others to Implement</a></li>
+<li><a class="reference internal" href="#anonymous-objects">Anonymous Objects</a></li>
+<li><a class="reference internal" href="#non-hierarchical-similarities">Non-hierarchical Similarities</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#informal-protocols">Informal Protocols</a></li>
+<li><a class="reference internal" href="#formal-pprotocols">Formal Pprotocols</a><ul>
+<li><a class="reference internal" href="#protocol-objects">Protocol Objects</a></li>
+<li><a class="reference internal" href="#conforming-to-a-protocol">Conforming to a Protocol</a></li>
+<li><a class="reference internal" href="#type-checking">Type Checking</a></li>
+<li><a class="reference internal" href="#protocols-within-protocols">Protocols within Protocols</a></li>
+<li><a class="reference internal" href="#referring-to-other-protocols">Referring to Other Protocols</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#remote-messaging">Remote Messaging</a></li>
+<li><a class="reference internal" href="#distributed-objects">Distributed Objects</a></li>
+<li><a class="reference internal" href="#language-support">Language Support</a><ul>
+<li><a class="reference internal" href="#synchronous-and-asynchronous-messages">Synchronous and Asynchronous Messages</a></li>
+<li><a class="reference internal" href="#pointer-arguments">Pointer Arguments</a></li>
+<li><a class="reference internal" href="#proxies-and-copies">Proxies and Copies</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#static-options">Static Options</a></li>
+<li><a class="reference internal" href="#static-typing">Static Typing</a><ul>
+<li><a class="reference internal" href="#id1">Type Checking</a></li>
+<li><a class="reference internal" href="#return-and-argument-types">Return and Argument Types</a></li>
+<li><a class="reference internal" href="#static-typing-to-an-inherited-class">Static Typing to an Inherited Class</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#getting-a-method-address">Getting a Method Address</a></li>
+<li><a class="reference internal" href="#getting-an-object-data-structure">Getting an Object Data Structure</a></li>
+<li><a class="reference internal" href="#type-encoding">Type Encoding</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=c7b489ce"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    </body>
+</html>

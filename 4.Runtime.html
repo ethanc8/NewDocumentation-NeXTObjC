@@ -1,0 +1,629 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="A - The Objective-C Language Summary" href="A.Summary.html" /><link rel="prev" title="3 - The Objective-C Extensions" href="3.Extensions.html" />
+
+    <!-- Generated with Sphinx 7.1.2 and Furo 2023.09.10 -->
+        <title>4 - The Run-Time System - OPENSTEP Object-Oriented Programming and the Objective-C Language 1996 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">OPENSTEP Object-Oriented Programming and the Objective-C Language 1996 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">OPENSTEP Object-Oriented Programming and the Objective-C Language 1996 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="0.Introduction.html">0 - Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1.ObjectOrientedProgramming.html">1 - Object-Oriented Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2.Language.html">2 - The Objective-C Language</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3.Extensions.html">3 - The Objective-C Extensions</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">4 - The Run-Time System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="A.Summary.html">A - The Objective-C Language Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="B.Grammar.html">B - Reference Manual for the Objective-C Language</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="the-run-time-system">
+<h1>4 - The Run-Time System<a class="headerlink" href="#the-run-time-system" title="Permalink to this heading">#</a></h1>
+<p>The Objective-C language defers as many decisions as it can from compile time and link time to run time. Whenever possible, it does things dynamically. This means that the language requires not just a compiler, but also a run-time system to execute the compiled code. The run-time system acts as a kind of operating system for the Objective-C language; it’s what makes the language work.</p>
+<p>Objective-C programs interact with the run-time system at three distinct levels:</p>
+<ul>
+<li><p>Through Objective-C source code. For the most part, the run-time system works automatically and behind the scenes. You use it just by writing and compiling Objective-C source code.</p>
+<p>It’s up to the compiler to produce the data structures that the run-time system requires and to arrange the run-time function calls that carry out language instructions. The data structures capture information found in class and category definitions and in protocol declarations; they include the class and protocol objects discussed earlier, as well as method selectors, instance variable templates, and other information distilled from source code. The principal run-time function is the one that sends messages, as described under ``<a class="reference internal" href="#coreobjc.html#"><span class="xref myst">HOW MESSAGING WORKS</span></a>’’ in <a class="reference internal" href="#coreobjc.html#"><span class="xref myst">Chapter 2</span></a>. It’s invoked by source-code message expressions.</p>
+</li>
+<li><p>Through a method interface defined in the NSObject class. Every object inherits from the NSObject class, so every object has access to the methods it defines. Most NSObject methods interact with the run-time system.</p>
+<p>Some of these methods simply query the system for information. The preceding chapters, for example, mentioned the <strong>class</strong> method, which asks an object to identify its class, <strong>isKindOfClass:</strong> and <strong>isMemberOfClass:</strong>, which test an object’s position in the inheritance hierarchy, <strong>respondsToSelector:</strong>, which checks whether an object can accept a particular message, <strong>conformsToProtocol:</strong>, which checks whether it conforms to a protocol, and <strong>methodForSelector:</strong>, which asks for the address of a method implementation. Methods like these give an object the ability to introspect about itself.
+Other methods set the run-time system in motion. For example, <strong>perform:</strong> and its companions initiate messages, and <strong>alloc</strong> produces a new object properly connected to its class.
+All these methods were mentioned in previous chapters and are described in detail in the NSObject class specification in the <em>Foundation Framework Reference</em>.</p>
+</li>
+<li><p>Through direct calls to run-time functions. The run-time system has a public interface, consisting mainly of a set of functions. Many are functions that duplicate what you get automatically by writing Objective-C code or what the NSObject class provides with a method interface. Others manipulate low-level run-time processes and data structures. These functions make it possible to develop other interfaces to the run-time system and produce tools that augment the development environment; they’re not needed when programming in Objective-C.</p>
+<p>However, a few of the run-time functions might on occasion be useful when writing an Objective-C program. These functions–such as <strong>sel_getUid()</strong>, which returns a method selector for a method name, and <strong>objc_msgSend()</strong>, which returns a class object for a class name–are defined in the Objective-C run time system described at various places in the text of this manual.</p>
+</li>
+</ul>
+<p>Because the NSObject class is at the root of all inheritance hierarchies, the methods it defines are inherited by all classes. Its methods therefore establish behaviors that are inherent to every instance and every class object. However, in a few cases, the NSObject class merely defines a framework for how something should be done; it doesn’t provide all the necessary code itself.</p>
+<p>For example, the NSObject class defines a <strong>description</strong> method that should return a character string associated with the receiver:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    if ( !strcmp([anObject description], &quot;Connochaetes taurinus&quot;) )
+        . . .
+</pre></div>
+</div>
+<p>If you define a class of named objects, you must implement a <strong>description</strong> method to return the specific character string associated with the receiver. NSObject’s version of the method can’t know what that name will be, so it merely returns the class name as a default.</p>
+<p>This chapter looks at three areas where the NSObject class provides a framework and defines conventions, but where you may need to write code to fill in the details:</p>
+<ul class="simple">
+<li><p>Allocating and initializing new instances of a class, and deallocating instances when they’re no longer needed</p></li>
+<li><p>Forwarding messages to another object</p></li>
+<li><p>Dynamically loading new modules into a running program</p></li>
+</ul>
+<p>Other conventions of the NSObject class are described in the NSObject class specification in the <em>Foundation Framework Reference</em>.</p>
+<section id="allocation-and-initialization">
+<h2>Allocation and Initialization<a class="headerlink" href="#allocation-and-initialization" title="Permalink to this heading">#</a></h2>
+<p>It takes two steps to create an object in Objective-C. You must both:</p>
+<ul class="simple">
+<li><p>Dynamically allocate memory for the new object, and</p></li>
+<li><p>Initialize the newly allocated memory to appropriate values.</p></li>
+</ul>
+<p>An object isn’t fully functional until both steps have been completed. As discussed in <a class="reference internal" href="#coreobjc.html#"><span class="xref myst">Chapter 2</span></a>, each step is accomplished by a separate method, but typically in a single line of code:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    id anObject = [[Rectangle alloc] init];
+</pre></div>
+</div>
+<p>Separating allocation from initialization gives you individual control over each step so that each can be modified independently of the other. The following sections look first at allocation and then at initialization, and discuss how they are in fact controlled and modified.</p>
+</section>
+<section id="allocating-memory-for-objects">
+<h2>Allocating Memory for Objects<a class="headerlink" href="#allocating-memory-for-objects" title="Permalink to this heading">#</a></h2>
+<p>In Objective-C, memory for new objects is allocated using class methods defined in the NSObject class. NSObject defines two principal methods for this purpose, <strong>alloc</strong> and <strong>allocWithZone:</strong>.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    + (id)alloc;
+    + (id)allocWithZone:(NSZone *)zone;
+</pre></div>
+</div>
+<p>These methods allocate enough memory to hold all the instance variables for an object belonging to the receiving class. They don’t need to be overridden and modified in subclasses.</p>
+<p>The argument passed to <strong>allocWithZone:</strong> determines where the new object will be located in memory. It permits you to group related objects into the same region of memory for better performance.</p>
+<section id="zones">
+<h3>Zones<a class="headerlink" href="#zones" title="Permalink to this heading">#</a></h3>
+<p>In a multitasking environment like OPENSTEP, users typically run several applications at once. These applications can easily require more memory than will physically fit on the user’s system.</p>
+<p>To solve this problem, OPENSTEP, like most modern systems, makes use of virtual memory–a system for addressing more information than can actually be accommodated in main memory. Whenever an application references some information, the system determines whether the memory page containing that information resides in main memory. If it doesn’t, the page with the requested information must be read in. If there’s no room for the new page, a page of resident memory must be stored to the disk to make room.</p>
+<p>This swapping of pages in and out of main memory, to and from the disk, is much slower than a direct memory reference. It slows the execution of applications, and, in a multitasking environment, can degrade the overall responsiveness of the system. Reducing swapping to a minimum can greatly increase system performance.</p>
+<p>One way to reduce swapping is to improve <em>locality of reference</em>, the chance that the next piece of information the system needs to reference will be located close to the last piece of information referenced, perhaps on the same page, or at least on a page recently referenced and so still in main memory. The idea is to minimize the number of pages that must be resident for a given operation by putting related information on the same page (or the same few pages) and keeping unrelated, or rarely used, information on other pages.</p>
+<p>To this end, OPENSTEP lets you partition dynamic memory into <em>zones</em> and direct which zone objects (and other data structures) should be allocated from.</p>
+<p>Zones are recorded in NSZone structures, one per zone. These structures are provided by the system; you don’t have to allocate memory for them or make copies. You also don’t need to look inside the structure or manipulate its fields. You can simply regard pointers to the structures as zone identifiers.</p>
+<p>The system creates one default zone for each application, which is returned by <strong>NSDefaultMallocZone()</strong>.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    NSZone *defaultZone = NSDefaultMallocZone();
+</pre></div>
+</div>
+<p>Other zones can be created by the <strong>NSCreateZone()</strong> function.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    NSZone *newZone = NSCreateZone(vm_page_size * 2, vm_page_size, YES);
+</pre></div>
+</div>
+<p>This function takes three arguments:</p>
+<ul class="simple">
+<li><p>The initial size of the zone in bytes.</p></li>
+<li><p>The granularity of the zone (how much it should grow or shrink by).</p></li>
+<li><p>Whether it’s possible to free memory from the zone. For most zones, this normally is YES. However, it can be NO if a zone is to be used temporarily, then destroyed (with <strong>NSRecycleZone()</strong>). Recycling a zone effectively deallocates all the memory within it (although any objects within the zone that have not yet been deallocated are first moved to the default zone).</p></li>
+</ul>
+<p>The initial size of a zone and its granularity should be set to small multiples of a page size, since a page is the smallest amount of memory handled by the virtual memory system. The size of a page can vary from installation to installation; its current value is stored in the <strong>vm_page_size</strong> global variable declared in <strong>mach/mach_init.h</strong>.</p>
+<p>Ideally, zones should be moderate in size. Large zones may fail to group related data onto a small number of pages; they’re prone to the same problem that zone allocation is meant to correct: the fragmentation of data across many pages.</p>
+<p>It’s also not a good idea to have a large number of zones with very little information in them. The free space in one zone won’t be available for allocation from other zones, so an application could end up using more memory than it should.</p>
+</section>
+<section id="allocating-from-a-zone">
+<h3>Allocating from a Zone<a class="headerlink" href="#allocating-from-a-zone" title="Permalink to this heading">#</a></h3>
+<p>The <strong>allocWithZone:</strong> method permits you to cluster related objects (such as a drawing and the graphic objects that make up the drawing) in the same region of memory. It takes a pointer to a zone as its argument:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    NSZone *myZone = NSCreateZone(vm_page_size, vm_page_size, YES);
+    id newObject = [[Rectangle allocWithZone:myZone] init];
+</pre></div>
+</div>
+<p>The <strong>zone</strong> method returns the zone of the receiver and can be used to make sure one object is allocated from the same zone as another object. For example, a Rectangle could be allocated from the same zone as the Drawing it will be a part of:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    id aRect = [[Rectangle allocWithZone:[Drawing zone]] init];
+</pre></div>
+</div>
+<p>The <strong>NSZoneMalloc()</strong> function lets you specify a zone when dynamically allocating memory for data structures that aren’t objects. It’s arguments are a zone and the number of bytes to be allocated:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    float *points = (float *)NSZoneMalloc(NSDefaultMallocZone(),
+        sizeof(float) * numPoints);
+</pre></div>
+</div>
+<p>Allocation methods and functions that don’t specify a zone, such as the <strong>alloc</strong> method, take memory from the default zone. The standard C <strong>malloc()</strong> function allocates from the default zone, or from memory outside any zone.</p>
+<p>Objects that are commonly used together should be kept together in the same zone, along with any related data structures the objects use. For example, all the objects that contribute to a particular document and its display (the NSWindow object, NSView objects, text data structures, and so on) could be kept together in the same zone, one created just for the document. When the document isn’t open, none of the pages in the zone will clutter main memory.</p>
+<p>It’s equally important to keep rarely used objects separate from those that are used more frequently. For example, users only occasionally refer to an application’s information panel (usually only when first becoming familiar with the application). If the objects that contribute to the panel share pages with objects that are used regularly, they will take up space in main memory even when they’re not needed.</p>
+<p>Frequent allocation and deallocation of objects can cause memory fragmentation. If your application often both allocates and frees a certain type of object, consider keeping all of those objects in the same zone to prevent the fragmentation of other zones.</p>
+</section>
+</section>
+<section id="initializing-new-objects">
+<h2>Initializing new Objects<a class="headerlink" href="#initializing-new-objects" title="Permalink to this heading">#</a></h2>
+<p>The <strong>alloc</strong> and <strong>allocWithZone:</strong> methods initialize a new object’s <strong>isa</strong> instance variable so that it points to the object’s class (the class object). All other instance variables are set to 0. Usually, an object needs to be more specifically initialized before it can be safely used.</p>
+<p>This initialization is the responsibility of class-specific instance methods that, by convention, begin with the abbreviation ``init’’. If the method takes no arguments, the method name is just those four letters, <strong>init</strong>. If it takes arguments, labels for the arguments follow the ``init’’ prefix. For example, an NSView can be initialized with an <strong>initWithFrame:</strong> method.</p>
+<p>Every class that declares instance variables must provide an <strong>init…</strong> method to initialize them. The NSObject class declares the <strong>isa</strong> variable and defines an <strong>init</strong> method. However, since <strong>isa</strong> is initialized when memory for a new object is allocated, all NSObject’s <strong>init</strong> method does is return <strong>self</strong>. NSObject declares the method mainly to establish the naming convention described above.</p>
+<section id="the-returned-object">
+<h3>The Returned Object<a class="headerlink" href="#the-returned-object" title="Permalink to this heading">#</a></h3>
+<p>An <strong>init…</strong> method normally initializes the instance variables of the receiver, then returns it. It’s the responsibility of the method to return an object that can be used without error.</p>
+<p>However, in some cases, this responsibility can mean returning a different object than the receiver. For example, if a class keeps a list of named objects, it might provide an <strong>initWithName:</strong> method to initialize new instances. If there can be no more than one object per name**,** <strong>initWithName:</strong> might refuse to assign the same name to two objects. When asked to assign a new instance a name that’s already being used by another object, it might free the newly allocated instance and return the other object–thus ensuring the uniqueness of the name while at the same time providing what was asked for, an instance with the requested name.</p>
+<p>In a few cases, it might be impossible for an <strong>init…</strong> method to do what it’s asked to do. For example, an <strong>initFromFile:</strong> method might get the data it needs from a file passed as an argument. If the file name it’s passed doesn’t correspond to an actual file, it won’t be able to complete the initialization. In such a case, the <strong>init…</strong> method could free the receiver and return <strong>nil</strong>, indicating that the requested object can’t be created.</p>
+<p>Because an <strong>init…</strong> method might return an object other than the newly allocated receiver, or even return <strong>nil</strong>, it’s important that programs use the value returned by the initialization method, not just that returned by <strong>alloc</strong> or <strong>allocWithZone:</strong>. The following code is very dangerous, since it ignores the return of <strong>init</strong>.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    id anObject = [SomeClass alloc];
+    [anObject init];
+    [anObject someOtherMessage];
+</pre></div>
+</div>
+<p>It’s recommended that you combine allocation and initialization messages:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    id anObject = [[SomeClass alloc] init];
+    [anObject someOtherMessage];
+</pre></div>
+</div>
+<p>If there’s a chance that the <strong>init…</strong> method might return <strong>nil</strong>, the return value should be checked before proceeding:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    id anObject = [[SomeClass alloc] init];
+    if ( anObject )
+    [anObject someOtherMessage];
+    else
+        . . .
+</pre></div>
+</div>
+</section>
+<section id="arguments">
+<h3>Arguments<a class="headerlink" href="#arguments" title="Permalink to this heading">#</a></h3>
+<p>An <strong>init…</strong> method must ensure that all of an object’s instance variables have reasonable values. This doesn’t mean that it needs to provide an argument for each variable. It can set some to default values or depend on the fact that (except for <strong>isa</strong>) all bits of memory allocated for a new object are set to 0. For example, if a class requires its instances to have a name and a data source, it might provide an <strong>initWithName:fromFile:</strong> method, but set nonessential instance variables to arbitrary values or allow them to have the null values set by default. It could then rely on methods like <strong>setEnabled:</strong>, <strong>setFriend:</strong>, and <strong>setDimensions:</strong> to modify default values after the initialization phase had been completed.</p>
+<p>Any <strong>init…</strong> method that takes arguments must be prepared to handle cases where an inappropriate value is passed. One option is to substitute a default value, and to let a null argument explicitly evoke the default.</p>
+</section>
+<section id="coordinating-classes">
+<h3>Coordinating Classes<a class="headerlink" href="#coordinating-classes" title="Permalink to this heading">#</a></h3>
+<p>Every class that declares instance variables must provide an <strong>init…</strong> method to initialize them (unless the variables require no initialization). The <strong>init…</strong> methods the class defines initialize only those variables declared in the class. Inherited instance variables are initialized by sending a message to <strong>super</strong> to perform an initialization method defined somewhere farther up the inheritance hierarchy:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    - initName: (char *)string
+    {
+    if ( self = [super init] ) {
+        name = (char *)NSZoneMalloc([self zone], 
+        strlen(string) + 1);
+        strcpy(name, string);
+        return self;
+        }
+    return nil;
+    }
+</pre></div>
+</div>
+<p>The message to <strong>super</strong> chains together initialization methods in all inherited classes. Because it comes first, it ensures that superclass variables are initialized before those declared in subclasses. For example, a Rectangle object must be initialized as an NSObject, an Graphic, and a Shape before it’s initialized as a Rectangle. (See <a class="reference internal" href="#coreobjc.html#"><span class="xref myst">Chapter 2</span></a> for a figure illustrating the Rectangle inheritance hierarchy.)</p>
+<p>The connection between the <strong>initWithName:</strong> method illustrated above and the inherited <strong>init</strong> method it incorporates is diagrammed in the figure below:</p>
+<p><img alt="" src="/web/20051228154442im_/http://www.toodarkpark.org/computers/objc/Images/HTML_Art/INITSI1.GIF" /> A class must also make sure that all inherited initialization methods work. For example, if class A defines an <strong>init</strong> method and its subclass B defines an <strong>initWithName:</strong> method, as shown in the figure above, B must also make sure that an <strong>init</strong> message will successfully initialize B instances. The easiest way to do that is to replace the inherited <strong>init</strong> method with a version that invokes <strong>initWithName:</strong>.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    - init
+    {
+    return [self initWithName:&quot;default&quot;];
+    }
+</pre></div>
+</div>
+<p>The <strong>initWithName:</strong> method would, in turn, invoke the inherited method, as was shown in the example and figure above. That figure can be modified to include B’s version of <strong>init</strong>, as shown below:</p>
+<p><img alt="" src="/web/20051228154442im_/http://www.toodarkpark.org/computers/objc/Images/HTML_Art/INITAB.GIF" /> Covering inherited initialization methods makes the class you define more portable to other applications. If you leave an inherited method uncovered, someone else may use it to produce incorrectly initialized instances of your class.</p>
+</section>
+<section id="the-designated-initializer">
+<h3>The Designated Initializer<a class="headerlink" href="#the-designated-initializer" title="Permalink to this heading">#</a></h3>
+<p>In the example above, <strong>initWithName:</strong> would be the <em>designated initializer</em> for its class (class B). The designated initializer is the method in each class that guarantees inherited instance variables are initialized (by sending a message to <strong>super</strong> to perform an inherited method). It’s also the method that does most of the work, and the one that other initialization methods in the same class invoke. It’s an OPENSTEP convention that the designated initializer is always the method that allows the most freedom to determine the character of a new instance (the one with the most arguments).</p>
+<p>It’s important to know the designated initializer when defining a subclass. For example, suppose we define class C, a subclass of B, and implement an <strong>initWithName:fromFile:</strong> method. In addition to this method, we have to make sure that the inherited <strong>init</strong> and <strong>initWithName:</strong> methods also work for instances of C. This can be done just by covering B’s <strong>initWithName:</strong> with a version that invokes <strong>initWithName:fromFile:</strong>.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    - initWithName:(char *)string&lt;
+    {
+    return [self initWithName:string fromFile:NULL];
+    }
+</pre></div>
+</div>
+<p>For an instance of the C class, the inherited <strong>init</strong> method will invoke this new version of <strong>initWithName:</strong> which will invoke <strong>initWithName:fromFile:</strong>. The relationship between these methods is diagrammed below.</p>
+<p><img alt="" src="/web/20051228154442im_/http://www.toodarkpark.org/computers/objc/Images/HTML_Art/INITBC.GIF" /> This figure omits an important detail. The <strong>initWithName:fromFile:</strong> method, being the designated initializer for the C class, will send a message to <strong>super</strong> to invoke an inherited initialization method. But which of B’s methods should it invoke, <strong>init</strong> or <strong>initWithName:</strong>? It can’t invoke <strong>init</strong>, for two reasons:</p>
+<ul class="simple">
+<li><p>Circularity would result (<strong>init</strong> invokes C’s <strong>initWithName:</strong>, which invokes <strong>initWithName:fromFile:</strong>, which invokes <strong>init</strong> again).</p></li>
+<li><p>It won’t be able to take advantage of the initialization code in B’s version of <strong>initWithName:</strong>.</p></li>
+</ul>
+<p>Therefore, <strong>initWithName:fromFile:</strong> must invoke <strong>initWithName:</strong>.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    - initWithName:(char *)string fromFile:(char *)pathname
+    {
+    if ( self = [super initWithName:string] )
+        . . .
+    }
+</pre></div>
+</div>
+<p>The general principle is this:</p>
+<p><em>The designated initializer in one class must, through a message to <strong>super</strong>, invoke the designated initializer in an inherited class.</em></p>
+<p><img alt="" src="/web/20051228154442im_/http://www.toodarkpark.org/computers/objc/Images/HTML_Art/INITALL.GIF" /> Designated initializers are chained to each other through messages to <strong>super</strong>, while other initialization methods are chained to designated initializers through messages to <strong>self</strong>.</p>
+<p>This figure shows how all the initialization methods in classes A, B, and C are linked. Messages to <strong>self</strong> are shown on the left and messages to <strong>super</strong> are shown on the right.</p>
+<p>Note that B’s version of <strong>init</strong> sends a message to <strong>self</strong> to invoke the <strong>initWithName:</strong> method. Therefore, when the receiver is an instance of the B class, it will invoke B’s version of <strong>initWithName:</strong>, and when the receiver is an instance of the C class, it will invoke C’s version.</p>
+</section>
+</section>
+<section id="combinig-allocation-and-initialization">
+<h2>Combinig Allocation and Initialization<a class="headerlink" href="#combinig-allocation-and-initialization" title="Permalink to this heading">#</a></h2>
+<p>By convention, in OPENSTEP classes define creation methods that combine the two steps of allocating and initializing to return new, initialized instances of the class. These methods typically take the form + <em>className</em>… where <em>className</em> is the name of the class. For instance, NSString has the following methods (among others):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    + (NSString *)stringWithCString:(const char *)bytes;
+    + (NSString *)stringWithFormat:(NSString *)format, ...;\
+</pre></div>
+</div>
+<p>Similarly, NSArray defines the following class methods that combine allocation and initialization:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    + (id)array;
+    + (id)arrayWithObject:(id)anObject;
+    + (id)arrayWithObjects:(id)firstObj, ...;
+</pre></div>
+</div>
+<p>Instances created with any of these methods will be deallocated automatically, so you don’t have to release them unless you first retain them.</p>
+<p>Methods that combine allocation and initialization are particularly valuable if the allocation must somehow be informed by the initialization. For example, if the data for the initialization is taken from a file, and the file might contain enough data to initialize more than one object, it would be impossible to know how many objects to allocate until the file is opened. In this case, you might implement a <strong>listFromFile:</strong> method that takes the name of the file as an argument. It would open the file, see how many objects to allocate, and create a List object large enough to hold all the new objects. It would then allocate and initialize the objects from data in the file, put them in the List, and finally return the List.</p>
+<p>It also makes sense to combine allocation and initialization in a single method if you want to avoid the step of blindly allocating memory for a new object that you might not use. As mentioned under ``<a class="reference internal" href="#runtime.html#930"><span class="xref myst">The Returned Object</span></a>’’ above, an <strong>init…</strong> method might sometimes substitute another object for the receiver. For example, when <strong>initWithName:</strong> is passed a name that’s already taken, it might free the receiver and in its place return the object that was previously assigned the name. This means, of course, that an object is allocated and freed immediately without ever being used.</p>
+<p>If the code that checks whether the receiver should be initialized is placed inside the method that does the allocation instead of inside <strong>init…</strong>, you can avoid the step of allocating a new instance when one isn’t needed.</p>
+<p>In the following example, the <strong>soloist</strong> method ensures that there’s no more than one instance of the Soloist class. It allocates and initializes an instance only once:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    + soloist
+    {    
+    static Soloist *instance = nil;
+
+    if ( instance == nil )
+        instance = [[self alloc] init];
+    return instance;
+    }
+</pre></div>
+</div>
+</section>
+<section id="deallocation">
+<h2>Deallocation<a class="headerlink" href="#deallocation" title="Permalink to this heading">#</a></h2>
+<p>The NSObject class defines a <strong>dealloc</strong> method that relinquishes the memory that was originally allocated for an object. You rarely invoke <strong>dealloc</strong> directly, however, because OPENSTEP provides a mechanism for the automatic disposal of objects (which makes use of <strong>dealloc</strong>). For more information on this automatic object disposal mechanism, see the introduction to the <em>Foundation Framework Reference</em>.</p>
+<p>The purpose of a <strong>dealloc</strong> message is to deallocate all the memory occupied by the receiver. NSObject’s version of the method deallocates the receiver’s instance variables, but doesn’t follow any variable that points to other memory. If the receiver allocated any additional memory–to store a character string or an array of structures, for example–that memory must also be deallocated (unless it’s shared by other objects). Similarly, if the receiver is served by another object that would be rendered useless in its absence, that object must also be deallocated.</p>
+<p>Therefore, it’s necessary for subclasses to override NSObject’s version of <strong>dealloc</strong> and implement a version that deallocates all of the other memory the object occupies. Every class that has its objects allocate additional memory must have its own <strong>dealloc</strong> method. Each version of <strong>dealloc</strong> ends with a message to <strong>super</strong> to perform an inherited version of the method, as illustrated in the following example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    - dealloc 
+    {
+    [companion release];
+    free(privateMemory);
+    vm_deallocate(task_self(), sharedMemory, memorySize);
+    [super dealloc];
+    }
+</pre></div>
+</div>
+<p>By working its way up the inheritance hierarchy, every <strong>dealloc</strong> message eventually invokes NSObject’s version of the of the method.</p>
+</section>
+<section id="forwarding">
+<h2>Forwarding<a class="headerlink" href="#forwarding" title="Permalink to this heading">#</a></h2>
+<p>It’s an error to send a message to an object that can’t respond to it. However, before announcing the error, the run-time system gives the receiving object a second chance to handle the message. It sends the object a <strong>forwardInvocation:</strong> message with an NSInvocation object as its sole argument–the NSInvocation object encapsulates the original message and the arguments that were passed with it.</p>
+<p>You can implement a <strong>forwardInvocation:</strong> method to give a default response to the message, or to avoid the error in some other way. As its name implies, <strong>forwardInvocation:</strong> is commonly used to forward the message to another object.</p>
+<p>To see the scope and intent of forwarding, imagine the following scenarios: Suppose, first, that you’re designing an object that can respond to a <strong>negotiate</strong> message, and you want its response to include the response of another kind of object. You could accomplish this easily by passing a <strong>negotiate</strong> message to the other object somewhere in the body of the <strong>negotiate</strong> method you implement.</p>
+<p>Take this a step further, and suppose that you want your object’s response to a <strong>negotiate</strong> message to be exactly the response implemented in another class. One way to accomplish this would be to make your class inherit the method from the other class. However, it might not be possible to arrange things this way. There may be good reasons why your class and the class that implements <strong>negotiate</strong> are in different branches of the inheritance hierarchy.</p>
+<p>Even if your class can’t inherit the <strong>negotiate</strong> method, you can still ``borrow’’ it by implementing a version of the method that simply passes the message on to an instance of the other class:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    - negotiate
+    {
+    if ( [someOtherObject respondsTo:@selector(negotiate)] )
+        return [someOtherObject negotiate];
+    return self;
+    }
+</pre></div>
+</div>
+<p>This way of doing things could get a little cumbersome, especially if there were a number of messages you wanted your object to pass on to the other object. You’d have to implement one method to cover each method you wanted to borrow from the other class. Moreover, it would be impossible to handle cases where you didn’t know, at the time you wrote the code, the full set of messages that you might want to forward. That set might depend on events at run time, and it might change as new methods and classes are implemented in the future.</p>
+<p>The second chance offered by a <strong>forwardInvocation:</strong> message provides a less ad hoc solution to this problem, and one that’s dynamic rather than static. It works like this: When an object can’t respond to a message because it doesn’t have a method matching the selector in the message, the run-time system informs the object by sending it a <strong>forwardInvocation:</strong> message. Every object inherits a <strong>forwardInvocation:</strong> method from the NSObject class. However, NSObject’s version of the method simply invokes <strong>doesNotRecognizeSelector:</strong> due to the unrecognized message. By overriding NSObject’s version and implementing your own, you can take advantage of the opportunity that the <strong>forwardInvocation:</strong> message provides to forward messages to other objects.</p>
+<p>To forward a message, all a <strong>forwardInvocation:</strong> method needs to do is:</p>
+<ul class="simple">
+<li><p>Determine where the message should go, and</p></li>
+<li><p>Send it there with its original arguments.</p></li>
+</ul>
+<p>The message can be sent with the <strong>invokeWithTarget:</strong> method:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    - (void)forwardInvocation:(NSInvocation *)anInvocation
+    {
+    if ([someOtherObject respondsToSelector:
+        [anInvocation selector]])
+        [anInvocation invokeWithTarget:someOtherObject];
+    else
+        [self doesNotRecognizeSelector:[anInvocation selector]];
+    }
+</pre></div>
+</div>
+<p>The return value of the message that’s forwarded is returned to the original sender. All types of return values can be delivered to the sender, including <strong>id</strong>s, structures, and double-precision floating point numbers.</p>
+<p>A <strong>forwardInvocation:</strong> method can act as a distribution center for unrecognized messages, parceling them out to different receivers. Or it can be a transfer station, sending all messages to the same destination. It can translate one message into another, or simply ``swallow’’ some messages so there’s no response and no error. A <strong>forwardInvocation:</strong> method can also consolidate several messages into a single response. What <strong>forwardInvocation:</strong> does is up to the implementor. However, the opportunity it provides for linking objects in a forwarding chain opens up possibilities for program design.</p>
+<p>Note: The <strong>forwardInvocation:</strong> method gets to handle messages only if they don’t invoke an existing method in the nominal receiver. If, for example, you want your object to forward <strong>negotiate</strong> messages to another object, it can’t have a <strong>negotiate</strong> method of its own. If it does, the message will never reach <strong>forwardInvocation:</strong>.</p>
+</section>
+<section id="forwarding-and-multiple-inheritance">
+<h2>Forwarding and Multiple Inheritance<a class="headerlink" href="#forwarding-and-multiple-inheritance" title="Permalink to this heading">#</a></h2>
+<p>Forwarding mimics inheritance, and can be used to lend some of the effects of multiple inheritance to Objective-C programs. As shown in the figure below, an object that responds to a message by forwarding it appears to borrow or ``inherit’’ a method implementation defined in another class.</p>
+<p><img alt="" src="/web/20051228154442im_/http://www.toodarkpark.org/computers/objc/Images/HTML_Art/FORWAR1.GIF" /> In this illustration, an instance of the Warrior class forwards a <strong>negotiate</strong> message to an instance of the Diplomat class. The Warrior will appear to negotiate like a Diplomat. It will seem to respond to the <strong>negotiate</strong> message, and for all practical purposes it does respond (although it’s really a Diplomat that’s doing the work).</p>
+<p>The object that forwards a message thus ``inherits’’ methods from two branches of the inheritance hierarchy–its own branch and that of the object that responds to the message. In the example above, it will appear as if the Warrior class inherits from Diplomat as well as its own superclass.</p>
+<p>Forwarding addresses most needs that lead programmers to value multiple inheritance. However, there’s an important difference between the two: Multiple inheritance combines different capabilities in a single object. It tends toward large, multifaceted objects. Forwarding, on the other hand, assigns separate responsibilities to separate objects. It decomposes problems into smaller objects, but associates those objects in a way that’s transparent to the message sender.</p>
+</section>
+<section id="surrogate-objects">
+<h2>Surrogate Objects<a class="headerlink" href="#surrogate-objects" title="Permalink to this heading">#</a></h2>
+<p>Forwarding not only mimics multiple inheritance, it also makes it possible to develop lightweight objects that represent or ``cover’’ more substantial objects. The surrogate stands in for the other object and funnels messages to it.</p>
+<p>The proxy discussed under ``<a class="reference internal" href="#moreobjc.html#"><span class="xref myst">REMOTE MESSAGING</span></a>’’ in <a class="reference internal" href="#moreobjc.html#"><span class="xref myst">Chapter 3</span></a> is such an object. A proxy takes care of the administrative details of forwarding messages to a remote receiver, making sure argument values are copied and retrieved across the connection, and so on. But it doesn’t attempt to do much else; it doesn’t duplicate the functionality of the remote object but simply gives the remote object a local address, a place where it can receive messages in another application.</p>
+<p>Other kinds of surrogate objects are also possible. Suppose, for example, that you have an object that manipulates a lot of data–perhaps it creates a complicated image or reads the contents of a file on disk. Setting this object up could be time-consuming, so you prefer to do it lazily–when it’s really needed or when system resources are temporarily idle. At the same time, you need at least a placeholder for this object in order for the other objects in the application to function properly.</p>
+<p>In this circumstance, you could initially create, not the full-fledged object, but a lightweight surrogate for it. This object could do some things on its own, such as answer questions about the data, but mostly it would just hold a place for the larger object and, when the time came, forward messages to it. When the surrogate’s <strong>forwardInvocation:</strong> method first receives a message destined for the other object, it would check to be sure that the object existed and would create it if it didn’t All messages for the larger object go through the surrogate, so as far as the rest of the program is concerned, the surrogate and the larger object would be the same.</p>
+</section>
+<section id="making-forwarding-transparent">
+<h2>Making Forwarding Transparent<a class="headerlink" href="#making-forwarding-transparent" title="Permalink to this heading">#</a></h2>
+<p>Although forwarding mimics inheritance, the NSObject class never confuses the two. Methods like <strong>respondsToSelector:</strong> and <strong>isKindOfClass:</strong> look only at the inheritance hierarchy, never at the forwarding chain. If, for example, a Warrior object is asked whether it responds to a <strong>negotiate</strong> message,</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    if ( [aWarrior respondsToSelector:@selector(negotiate)] )
+    . . .
+</pre></div>
+</div>
+<p>the answer will be NO, even though it can receive <strong>negotiate</strong> messages without error and respond to them, in a sense, by forwarding them to a Diplomat. (See the previous figure.)</p>
+<p>In many cases, NO is the right answer. But it may not be. If you use forwarding to set up a surrogate object or to extend the capabilities of a class, the forwarding mechanism should probably be as transparent as inheritance. If you want your objects to act as if they truly inherited the behavior of the objects they forward messages to, you’ll need to re-implement the <strong>respondsToSelector:</strong> and <strong>isKindOfClass:</strong> methods to include your forwarding algorithm:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    - (BOOL)respondsToSelector:(SEL)aSelector
+    {
+    if ( [super respondsToSelector:aSelector] )
+        return YES;
+    else {
+        /* Here, test whether the aSelector message can be     *
+         * forwarded to another object and whether that object *
+         * can respond to it.  Return YES if it can.           */
+    }
+    return NO;
+    }
+</pre></div>
+</div>
+<p>In addition to <strong>respondsToSelector:</strong> and <strong>isKindOfClass:</strong>, the <strong>instancesRespondToSelector:</strong> method should also mirror the forwarding algorithm. This method rounds out the set. If protocols are used, the <strong>conformsToProtocol:</strong> method should likewise be added to the list. Similarly, if an object forwards any remote messages it receives, it should have a version of <strong>methodSignatureForSelector:</strong> that can return accurate descriptions of the methods that ultimately respond to the forwarded messages.</p>
+<p>You might consider putting the forwarding algorithm somewhere in private code and have all these methods, <strong>forwardInvocation:</strong> included, call it.</p>
+<p>Note: The methods mentioned above are described in the NSObject class specification in the <em>Foundation Framework Reference</em>. For information on <strong>invokeWithTarget:</strong>, see the NSInvocation class specification in the <em>Foundation Framework Reference</em>.</p>
+</section>
+<section id="dynamic-loading">
+<h2>Dynamic Loading<a class="headerlink" href="#dynamic-loading" title="Permalink to this heading">#</a></h2>
+<p>An Objective-C program can load and link new classes and categories while it’s running. The new code is incorporated into the program and treated identically to classes and categories loaded at the start.</p>
+<p>Dynamic loading can be used to do a lot of different things. For example, device drivers are dynamically loaded into the kernel. Adaptors for database servers are dynamically loaded by the Enterprise Objects(tm) Framework.</p>
+<p>In the OPENSTEP environment, dynamic loading is commonly used to allow applications to be customized. Others can write modules that your program will load at run time–much as Interface Builder loads custom palettes, OPENSTEP’s Preferences application loads custom displays, and its Workspace Manager loads data inspectors. The loadable modules extend what your application can do. They contribute to it in ways that you permit, but could not have anticipated or defined yourself. You provide the framework, but others provide the code.</p>
+<p>Although there are run-time functions that enable dynamic loading (<strong>objc_loadModules()</strong> and <strong>objc_unloadModules()</strong>, defined in <strong>objc/objc-load.h</strong>), OPENSTEP’s NSBundle class provides a significantly more convenient interface for dynamic loading–one that’s object-oriented and integrated with related services. See the NSBundle class specification in the <em>Foundation Framework Reference</em> for information on the NSBundle class and its use.</p>
+<p><a class="reference internal" href="#moreobjc.html"><span class="xref myst"><img alt="" src="/web/20051228154442im_/http://www.toodarkpark.org/computers/objc/Images/DocsLeftArrow.gif" /></span></a> <a class="reference internal" href="#objctoc.html"><span class="xref myst"><img alt="" src="/web/20051228154442im_/http://www.toodarkpark.org/computers/objc/Images/DocsContents.gif" /></span></a> <a class="reference internal" href="#summary.html"><span class="xref myst"><img alt="" src="/web/20051228154442im_/http://www.toodarkpark.org/computers/objc/Images/DocsRightArrow.gif" /></span></a></p>
+<hr class="docutils" />
+<p>Last Modified: 01:26pm , January 13, 1996</p>
+<hr class="docutils" />
+<p><a class="reference external" href="http://web.archive.org/web/20051228154442/http://www.next.com/HotNews/">Hot News</a> | <a class="reference external" href="http://web.archive.org/web/20051228154442/http://www.next.com/OpenStep/">OpenStep</a> | <a class="reference external" href="http://web.archive.org/web/20051228154442/http://www.next.com/WebObjects/">WebObjects</a> | <a class="reference external" href="http://web.archive.org/web/20051228154442/http://www.next.com/Services/">Services</a> | <a class="reference external" href="http://web.archive.org/web/20051228154442/http://www.next.com/BuyNow/">Buy Now</a> | <a class="reference external" href="http://web.archive.org/web/20051228154442/http://www.next.com/NeXTanswers/">NeXTanswers</a> | <a class="reference external" href="http://web.archive.org/web/20051228154442/http://www.next.com/Search/">Search</a> | <a class="reference external" href="http://web.archive.org/web/20051228154442/http://www.next.com/AboutNeXT/">About NeXT</a></p>
+<hr class="docutils" />
+<p>NeXT sales and product information inquiries? <a class="reference external" href="http://web.archive.org/web/20051228154442/http://www.next.com/AboutNeXT/Feedback.html">Click here</a><br />
+<a class="reference external" href="http://web.archive.org/web/20051228154442/http://www.next.com/Legal/">Copyright</a> 1996 <a class="reference external" href="http://web.archive.org/web/20051228154442/http://www.next.com/">NeXT Software, Inc.</a> <a class="reference external" href="http://web.archive.org/web/20051228154442/http://www.next.com/Legal/">Proprietary Notices.</a></p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="A.Summary.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">A - The Objective-C Language Summary</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="3.Extensions.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">3 - The Objective-C Extensions</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 1996, NeXT Software, Inc.
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">4 - The Run-Time System</a><ul>
+<li><a class="reference internal" href="#allocation-and-initialization">Allocation and Initialization</a></li>
+<li><a class="reference internal" href="#allocating-memory-for-objects">Allocating Memory for Objects</a><ul>
+<li><a class="reference internal" href="#zones">Zones</a></li>
+<li><a class="reference internal" href="#allocating-from-a-zone">Allocating from a Zone</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#initializing-new-objects">Initializing new Objects</a><ul>
+<li><a class="reference internal" href="#the-returned-object">The Returned Object</a></li>
+<li><a class="reference internal" href="#arguments">Arguments</a></li>
+<li><a class="reference internal" href="#coordinating-classes">Coordinating Classes</a></li>
+<li><a class="reference internal" href="#the-designated-initializer">The Designated Initializer</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#combinig-allocation-and-initialization">Combinig Allocation and Initialization</a></li>
+<li><a class="reference internal" href="#deallocation">Deallocation</a></li>
+<li><a class="reference internal" href="#forwarding">Forwarding</a></li>
+<li><a class="reference internal" href="#forwarding-and-multiple-inheritance">Forwarding and Multiple Inheritance</a></li>
+<li><a class="reference internal" href="#surrogate-objects">Surrogate Objects</a></li>
+<li><a class="reference internal" href="#making-forwarding-transparent">Making Forwarding Transparent</a></li>
+<li><a class="reference internal" href="#dynamic-loading">Dynamic Loading</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=c7b489ce"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    </body>
+</html>
