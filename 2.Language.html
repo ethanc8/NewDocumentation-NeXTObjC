@@ -203,7 +203,7 @@
 <p>This chapter describes the Objective-C language and discusses the principles of object-oriented programming as they’re implemented in Objective-C. It covers all the basic features that the language adds to standard C. The next chapter continues the discussion by taking up more advanced and less commonly used language features.</p>
 <p>Objective-C syntax is a superset of standard C syntax, and its compiler works for both C and Objective-C source code. The compiler recognizes Objective-C source files by a ``.m’’ extension, just as it recognizes files containing only standard C syntax by a ``.c’’ extension. The Objective-C language is fully compatible with ANSI standard C.</p>
 <p>Objective-C can also be used as an extension to C++. At first glance, this may seem superfluous since C++ is itself an object-oriented extension of C. But C++ was designed primarily as ``a better C,’’ and not necessarily as a full-featured object-oriented language. It lacks some of the possibilities for object-oriented design that dynamic typing and dynamic binding bring to Objective-C. At the same time, it has useful language features not found in Objective-C. When you use the two languages in combination, you can assign appropriate roles to the features found in each and take advantage of what’s best in both.</p>
-<p>Because object-oriented programs postpone many decisions from compile time to run time, object-oriented languages depend on a run-time system for executing the compiled code. The run-time system for the Objective-C language is discussed in <a class="reference internal" href="#runtime.html#"><span class="xref myst">Chapter 4</span></a>. This chapter and the next present the language, but touch on important elements of the run-time system as they’re important for understanding language features. NeXT has modified the GNU C compiler to also compile Objective-C and provides its own run-time system.</p>
+<p>Because object-oriented programs postpone many decisions from compile time to run time, object-oriented languages depend on a run-time system for executing the compiled code. The run-time system for the Objective-C language is discussed in <a class="reference internal" href="4.Runtime.html"><span class="std std-doc">Chapter 4</span></a>. This chapter and the next present the language, but touch on important elements of the run-time system as they’re important for understanding language features. NeXT has modified the GNU C compiler to also compile Objective-C and provides its own run-time system.</p>
 <section id="objects">
 <h2>Objects<a class="headerlink" href="#objects" title="Permalink to this heading">#</a></h2>
 <p>As the name implies, object-oriented programs are built around <em>objects</em>. An object associates data with the particular operations that can use or affect that data. In Objective-C, these operations are known as the object’s <em>methods</em>; the data they affect are its <em>instance variables</em>. In essence, an object bundles a data structure (instance variables) and a group of procedures (methods) into a self-contained programming unit.</p>
@@ -227,8 +227,8 @@
 <p>This is possible because every object carries with it an <strong>isa</strong> instance variable that identifies the object’s <em>class</em>–what kind of object it is. Every Rectangle object would be able to tell the run-time system that it is a Rectangle. Every Circle can say that it is a Circle. Objects with the same behavior (methods) and the same kinds of data (instance variables) are members of the same class.</p>
 <p>Objects are thus <em>dynamically typed</em> at run time. Whenever it needs to, the run-time system can find the exact class that an object belongs to, just by asking the object. Dynamic typing in Objective-C serves as the foundation for dynamic binding, discussed later.</p>
 <p>The <strong>isa</strong> pointer also enables objects to introspect about themselves as objects. The compiler doesn’t discard much of the information it finds in source code; it arranges most of it in data structures for the run-time system to use. Through <strong>isa</strong>, objects can find this information and reveal it at run time. An object can, for example, say whether it has a particular method in its repertoire and what the name of its superclass is.</p>
-<p>Object classes are discussed in more detail under ``<a class="reference internal" href="#coreobjc.html#1341"><span class="xref myst">CLASSES</span></a>’’ below.</p>
-<p>It’s also possible to give the compiler information about the class of an object by statically typing it in source code using the class name. Classes are particular kinds of objects, and the class name can serve as a type name. See ``<a class="reference internal" href="#coreobjc.html#1377"><span class="xref myst">CLASS TYPES</span></a>’’ later in this chapter and ``<a class="reference internal" href="#moreobjc.html#"><span class="xref myst">STATIC OPTIONS</span></a>’’ in <a class="reference internal" href="#moreobjc.html#"><span class="xref myst">Chapter 3</span></a>.</p>
+<p>Object classes are discussed in more detail under ``<a class="reference internal" href="#classes">CLASSES</a>’’ below.</p>
+<p>It’s also possible to give the compiler information about the class of an object by statically typing it in source code using the class name. Classes are particular kinds of objects, and the class name can serve as a type name. See ``<a class="reference internal" href="#class-types">CLASS TYPES</a>’’ later in this chapter and ``<a class="reference internal" href="3.Extensions.html#static-options"><span class="std std-ref">STATIC OPTIONS</span></a>’’ in <a class="reference internal" href="3.Extensions.html"><span class="std std-doc">Chapter 3</span></a>.</p>
 </section>
 <section id="messages">
 <h2>Messages<a class="headerlink" href="#messages" title="Permalink to this heading">#</a></h2>
@@ -275,7 +275,7 @@
 <p>A method has automatic access to the receiving object’s instance variables. You don’t need to pass them to the method as arguments. For example, the <strong>primaryColor</strong> method illustrated above takes no arguments, yet it can find the primary color for <strong>otherRect</strong> and return it. Every method assumes the receiver and its instance variables, without having to declare them as arguments.</p>
 <p>This convention simplifies Objective-C source code. It also supports the way object-oriented programmers think about objects and messages. Messages are sent to receivers much as letters are delivered to your home. Message arguments bring information from the outside to the receiver; they don’t need to bring the receiver to itself.</p>
 <p>A method has automatic access only to the receiver’s instance variables. If it requires information about a variable stored in another object, it must send a message to the object asking it to reveal the contents of the variable. The <strong>primaryColor</strong> and <strong>isFilled</strong> methods shown above are used for just this purpose.</p>
-<p>See ``<a class="reference internal" href="#coreobjc.html#1445"><span class="xref myst">DEFINING A CLASS</span></a>’’ for more information on referring to instance variables.</p>
+<p>See ``<a class="reference internal" href="#defining-a-class">DEFINING A CLASS</a>’’ for more information on referring to instance variables.</p>
 </section>
 <section id="polymorphism">
 <h2>Polymorphism<a class="headerlink" href="#polymorphism" title="Permalink to this heading">#</a></h2>
@@ -287,14 +287,14 @@
 <h2>Dynamic Binding<a class="headerlink" href="#dynamic-binding" title="Permalink to this heading">#</a></h2>
 <p>A crucial difference between function calls and messages is that a function and its arguments are joined together in the compiled code, but a message and a receiving object aren’t united until the program is running and the message is sent. Therefore, the exact method that will be invoked to respond to a message can only be determined at run time, not when the code is compiled.</p>
 <p>The precise method that a message invokes depends on the receiver. Different receivers may have different method implementations for the same method name (polymorphism). For the compiler to find the right method implementation for a message, it would have to know what kind of object the receiver is–what class it belongs to. This is information the receiver is able to reveal at run time when it receives a message (dynamic typing), but it’s not available from the type declarations found in source code.</p>
-<p>The selection of a method implementation happens at run time. When a message is sent, a run-time messaging routine looks at the receiver and at the method named in the message. It locates the receiver’s implementation of a method matching the name, ``calls’’ the method, and passes it a pointer to the receiver’s instance variables. (For more on this routine, see ``<a class="reference internal" href="#coreobjc.html#1522"><span class="xref myst">HOW MESSAGING WORKS</span></a>’’ below.)</p>
+<p>The selection of a method implementation happens at run time. When a message is sent, a run-time messaging routine looks at the receiver and at the method named in the message. It locates the receiver’s implementation of a method matching the name, ``calls’’ the method, and passes it a pointer to the receiver’s instance variables. (For more on this routine, see ``<a class="reference internal" href="#how-messaging-works">HOW MESSAGING WORKS</a>’’ below.)</p>
 <p>The method name in a message thus serves to ``select’’ a method implementation. For this reason, method names in messages are often referred to as <em>selectors</em>.</p>
 <p>This <em>dynamic binding</em> of methods to messages works hand-in-hand with polymorphism to give object-oriented programming much of its flexibility and power. Since each object can have its own version of a method, a program can achieve a variety of results, not by varying the message itself, but by varying just the object that receives the message. This can be done as the program runs; receivers can be decided ``on the fly’’ and can be made dependent on external factors such as user actions.</p>
 <p>When executing code based upon the Application Kit, for example, users determine which objects receive messages from menu commands like Cut, Copy, and Paste. The message goes to whatever object controls the current selection. An object that displays editable text would react to a <strong>copy</strong> message differently than an object that displays scanned images. An object that represents a set of shapes would respond differently than a Rectangle. Since messages don’t select methods (methods aren’t bound to messages) until run time, these differences are isolated in the methods that respond to the message. The code that sends the message doesn’t have to be concerned with them; it doesn’t even have to enumerate the possibilities. Each application can invent its own objects that respond in their own way to <strong>copy:</strong> messages.</p>
-<p>Objective-C takes dynamic binding one step further and allows even the message that’s sent (the method selector) to be a variable that’s determined at run time. This is discussed in the section on ``<a class="reference internal" href="#coreobjc.html#1522"><span class="xref myst">HOW MESSAGING WORKS</span></a>.’’</p>
+<p>Objective-C takes dynamic binding one step further and allows even the message that’s sent (the method selector) to be a variable that’s determined at run time. This is discussed in the section on ``<a class="reference internal" href="#how-messaging-works">HOW MESSAGING WORKS</a>.’’</p>
 </section>
 <section id="classes">
-<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this heading">#</a></h2>
+<span id="id1"></span><h2>Classes<a class="headerlink" href="#classes" title="Permalink to this heading">#</a></h2>
 <p>An object-oriented program is typically built from a variety of objects. A program based on the OPENSTEP software frameworks might use NSMatrix objects, NSWindow objects, NSDictionary objects, NSFont objects, NSText objects, and many others. Programs often use more than one object of the same kind or <em>class</em>–several NSArrays or NSWindows, for example.</p>
 <p>In Objective-C, you define objects by defining their class. The class definition is a prototype for a kind of object; it declares the instance variables that become part of every member of the class, and it defines a set of methods that all objects in the class can use.</p>
 <p>The compiler creates just one accessible object for each class, a <em>class object</em> that knows how to build new objects belonging to the class. (For this reason it’s sometimes also called a ``factory object.’’) The class object is the compiled version of the class; the objects it builds are <em>instances</em> of the class. The objects that will do the main work of your program are instances created by the class object at run time.</p>
@@ -302,7 +302,7 @@
 <p>By convention, class names begin with an uppercase letter (such as ``Rectangle’’); the names of instances typically begin with a lowercase letter (such as ``myRect’’).</p>
 </section>
 <section id="inheritance">
-<h2>Inheritance<a class="headerlink" href="#inheritance" title="Permalink to this heading">#</a></h2>
+<span id="id2"></span><h2>Inheritance<a class="headerlink" href="#inheritance" title="Permalink to this heading">#</a></h2>
 <p>Class definitions are additive; each new class that you define is based on another class through which it <em>inherits</em> methods and instance variables. The new class simply adds to or modifies what it inherits. It doesn’t need to duplicate inherited code.</p>
 <p>Inheritance links all classes together in a hierarchical tree with a single class at its root. When writing code that is based upon the Foundation framework, that root class is typically NSObject. Every class (except a root class) has a <em>superclass</em> one step nearer the root, and any class (including a root class) can be the superclass for any number of <em>subclasses</em> one step farther from the root. The figure below illustrates the hierarchy for a few of the classes used in the drawing program.</p>
 <p><img alt="" src="/web/20051228163749im_/http://www.toodarkpark.org/computers/objc/Images/HTML_Art/GRAPHI1.GIF" /> This figure shows that the Square class is a subclass of the Rectangle class, the Rectangle class is a subclass of Shape, Shape is a subclass of Graphic, and Graphic is a subclass of NSObject. Inheritance is cumulative. So a Square object has the methods and instance variables defined for Rectangle, Shape, Graphic, and NSObject, as well as those defined specifically for Square. This is simply to say that a Square object isn’t only a Square, it’s also a Rectangle, a Shape, a Graphic, and an NSObject.</p>
@@ -331,7 +331,7 @@
 <h3>Overriding One Method with Another<a class="headerlink" href="#overriding-one-method-with-another" title="Permalink to this heading">#</a></h3>
 <p>There’s one useful exception to inheritance: When you define a new class, you can implement a new method with the same name as one defined in a class farther up the hierarchy. The new method overrides the original; instances of the new class will perform it rather than the original, and subclasses of the new class will inherit it rather than the original.</p>
 <p>For example, Graphic defines a <strong>display</strong> method that Rectangle overrides by defining its own version of <strong>display</strong>. The Graphic method is available to all kinds of objects that inherit from the Graphic class–but not to Rectangle objects, which instead perform the Rectangle version of <strong>display</strong>.</p>
-<p>Although overriding a method blocks the original version from being inherited, other methods defined in the new class can skip over the redefined method and find the original (see ``<a class="reference internal" href="#coreobjc.html#1580"><span class="xref myst">MESSAGES TO SELF AND SUPER</span></a>,’’ below, to learn how).</p>
+<p>Although overriding a method blocks the original version from being inherited, other methods defined in the new class can skip over the redefined method and find the original (see ``<a class="reference internal" href="#messages-to-self-and-super"><span class="xref myst">MESSAGES TO SELF AND SUPER</span></a>,’’ below, to learn how).</p>
 <p>A redefined method can also incorporate the very method it overrides. When it does, the new method serves only to refine or modify the method it overrides, rather than replace it outright. When several classes in the hierarchy define the same method, but each new version incorporates the version it overrides, the implementation of the method is effectively spread over all the classes.</p>
 <p>Although a subclass can override inherited methods, it can’t override inherited instance variables. Since an object has memory allocated for every instance variable it inherits, you can’t override an inherited variable by declaring a new one with the same name. If you try, the compiler will complain.</p>
 </section>
@@ -344,7 +344,7 @@
 </section>
 </section>
 <section id="class-types">
-<h2>Class Types<a class="headerlink" href="#class-types" title="Permalink to this heading">#</a></h2>
+<span id="id3"></span><h2>Class Types<a class="headerlink" href="#class-types" title="Permalink to this heading">#</a></h2>
 <p>A class definition is a specification for a kind of object. The class, in effect, defines a data type. The type is based not just on the data structure the class defines (instance variables), but also on the behavior included in the definition (methods).</p>
 <p>A class name can appear in source code wherever a type specifier is permitted in C–for example, as an argument to the <strong>sizeof</strong> operator:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    int i = sizeof(Rectangle);
@@ -363,7 +363,7 @@
 </pre></div>
 </div>
 <p>This is possible because a Rectangle is a Graphic. It’s more than a Graphic since it also has the instance variables and method capabilities of a Shape and a Rectangle, but it’s a Graphic nonetheless. For purposes of type checking, the compiler will consider <strong>myRect</strong> to be an Graphic, but at run time it will be treated as a Rectangle.</p>
-<p>See ``<a class="reference internal" href="#moreobjc.html#"><span class="xref myst">STATIC OPTIONS</span></a>’’ in the next chapter for more on static typing and its benefits.</p>
+<p>See ``<a class="reference internal" href="3.Extensions.html#static-options"><span class="std std-ref">STATIC OPTIONS</span></a>’’ in the next chapter for more on static typing and its benefits.</p>
 </section>
 <section id="type-introspection">
 <h3>Type Introspection<a class="headerlink" href="#type-introspection" title="Permalink to this heading">#</a></h3>
@@ -469,7 +469,7 @@
     anObject = [[Rectangle alloc] init];
 </pre></div>
 </div>
-<p>Here <strong>anObject</strong> is statically typed to be a Rectangle. The compiler will expect it to have the data structure of a Rectangle instance and the instance methods defined and inherited by the Rectangle class. Static typing enables the compiler to do better type checking and makes source code more self-documenting. See ``<a class="reference internal" href="#moreobjc.html#"><span class="xref myst">STATIC OPTIONS</span></a>’’ in the next chapter for details.</p>
+<p>Here <strong>anObject</strong> is statically typed to be a Rectangle. The compiler will expect it to have the data structure of a Rectangle instance and the instance methods defined and inherited by the Rectangle class. Static typing enables the compiler to do better type checking and makes source code more self-documenting. See ``<a class="reference internal" href="3.Extensions.html#static-options"><span class="std std-ref">STATIC OPTIONS</span></a>’’ in the next chapter for details.</p>
 <p>Only instances can be statically typed; class objects can’t be, since they aren’t members of a class, but rather belong to the Class data type.</p>
 </li>
 <li><p>As the receiver in a message expression, the class name refers to the class object. This usage was illustrated in several of the examples above. The class name can stand for the class object only as a message receiver. In any other context, you must ask the class object to reveal its <strong>id</strong> (by sending it a <strong>class</strong> message). The example below passes the Rectangle class as an argument in an <strong>isKindOf:</strong> message.</p>
@@ -489,7 +489,7 @@
 <p>Class names compete in the same name space as variables and functions. A class and a global variable can’t have the same name. Class names are about the only names with global visibility in Objective-C.</p>
 </section>
 <section id="defining-a-class">
-<h2>Defining a Class<a class="headerlink" href="#defining-a-class" title="Permalink to this heading">#</a></h2>
+<span id="id4"></span><h2>Defining a Class<a class="headerlink" href="#defining-a-class" title="Permalink to this heading">#</a></h2>
 <p>Much of object-oriented programming consists of writing the code for new objects–defining new classes. In Objective-C, classes are defined in two parts:</p>
 <ul class="simple">
 <li><p>An <em>interface</em> that declares the methods and instance variables of the class and names its superclass</p></li>
@@ -515,7 +515,7 @@
     @end
 </pre></div>
 </div>
-<p>The first line of the declaration presents the new class name and links it to its superclass. The superclass defines the position of the new class in the inheritance hierarchy, as discussed under ``<a class="reference internal" href="#coreobjc.html#1347"><span class="xref myst">INHERITANCE</span></a>’’ above. If the colon and superclass name are omitted, the new class is declared as a root class, a rival to the NSObject class.</p>
+<p>The first line of the declaration presents the new class name and links it to its superclass. The superclass defines the position of the new class in the inheritance hierarchy, as discussed under ``<a class="reference internal" href="#inheritance">INHERITANCE</a>’’ above. If the colon and superclass name are omitted, the new class is declared as a root class, a rival to the NSObject class.</p>
 <p>Following the class declaration, braces enclose declarations of <em>instance variables</em>, the data structures that will be part of each instance of the class. Here’s a partial list of instance variables that might be declared in the Rectangle class:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    float width
 
@@ -668,7 +668,7 @@
 </pre></div>
 </div>
 <section id="referring-to-instance-variables">
-<h3>Referring to Instance Variables<a class="headerlink" href="#referring-to-instance-variables" title="Permalink to this heading">#</a></h3>
+<span id="id5"></span><h3>Referring to Instance Variables<a class="headerlink" href="#referring-to-instance-variables" title="Permalink to this heading">#</a></h3>
 <p>By default, the definition of an instance method has all the instance variables of a potential receiving object within its scope. It can refer to them simply by name. Although the compiler creates the equivalent of C structures to store instance variables, the exact nature of the structure is hidden. You don’t need either of the structure operators (`<strong>.</strong>’ or `<strong>-&gt;</strong>’) to refer to an object’s data. For example, the following method definition refers to the receiver’s <strong>tag</strong> instance variable:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    - (void)setFilled:(BOOL)flag
     {
@@ -774,7 +774,7 @@
 </section>
 </section>
 <section id="how-messaging-works">
-<h2>How Messaging Works<a class="headerlink" href="#how-messaging-works" title="Permalink to this heading">#</a></h2>
+<span id="id6"></span><h2>How Messaging Works<a class="headerlink" href="#how-messaging-works" title="Permalink to this heading">#</a></h2>
 <p>In Objective-C, messages aren’t bound to method implementations until run time. The compiler converts a message expression,</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    [receiver message]
 </pre></div>
@@ -874,7 +874,7 @@
 </pre></div>
 </div>
 <p>The <strong>respondsToSelector:</strong> test is especially important when sending messages to objects that you don’t have control over at compile time. For example, if you write code that sends a message to an object represented by a variable that others can set, you should check to be sure the receiver implements a method that can respond to the message.</p>
-<p>Note: An object can also arrange to have messages it receives forwarded to other objects, if it can’t respond to them directly itself. In that case, it will appear that the object can’t handle the message, even though it responds to it indirectly by assigning it to another object. Forwarding is discussed in <a class="reference internal" href="#runtime.html#"><span class="xref myst">Chapter 4</span></a>, ``<strong><a class="reference internal" href="#runtime.html#"><span class="xref myst">The Run-Time System</span></a></strong>.’’</p>
+<p>Note: An object can also arrange to have messages it receives forwarded to other objects, if it can’t respond to them directly itself. In that case, it will appear that the object can’t handle the message, even though it responds to it indirectly by assigning it to another object. Forwarding is discussed in <a class="reference internal" href="4.Runtime.html"><span class="std std-doc">Chapter 4</span></a>, ``<strong><a class="reference internal" href="4.Runtime.html"><span class="std std-doc">The Run-Time System</span></a></strong>.’’</p>
 </section>
 </section>
 <section id="hidden-arguments">
@@ -904,6 +904,7 @@
 </pre></div>
 </div>
 <p><strong>self</strong> is discussed in more detail in the next section.</p>
+<p>=(messages-to-self-and-super)</p>
 </section>
 <section id="messages-to-self-and-super">
 <h2>Messages to Self and Super<a class="headerlink" href="#messages-to-self-and-super" title="Permalink to this heading">#</a></h2>
@@ -1018,15 +1019,7 @@
 </div>
 <p>Only instance variables of the receiver can be directly set this way. Since the receiver for a class method (the class object) has no instance variables, this syntax can’t be used. However, if <strong>newInstance</strong> had been statically typed, something similar would have been possible:</p>
 <p>newInstance-&gt;linePattern = aPattern</p>
-<p>See ``<a class="reference internal" href="#coreobjc.html#1490"><span class="xref myst">Referring to Instance Variables</span></a>,’’ earlier in this chapter, for more on when this syntax is permitted.</p>
-<p><a class="reference internal" href="#oop.html"><span class="xref myst"><img alt="" src="/web/20051228163749im_/http://www.toodarkpark.org/computers/objc/Images/DocsLeftArrow.gif" /></span></a> <a class="reference internal" href="#objctoc.html"><span class="xref myst"><img alt="" src="/web/20051228163749im_/http://www.toodarkpark.org/computers/objc/Images/DocsContents.gif" /></span></a> <a class="reference internal" href="#moreobjc.html"><span class="xref myst"><img alt="" src="/web/20051228163749im_/http://www.toodarkpark.org/computers/objc/Images/DocsRightArrow.gif" /></span></a></p>
-<hr class="docutils" />
-<p>Last Modified: 01:17am , January 19, 1996</p>
-<hr class="docutils" />
-<p><a class="reference external" href="http://web.archive.org/web/20051228163749/http://www.next.com/HotNews/">Hot News</a> | <a class="reference external" href="http://web.archive.org/web/20051228163749/http://www.next.com/OpenStep/">OpenStep</a> | <a class="reference external" href="http://web.archive.org/web/20051228163749/http://www.next.com/WebObjects/">WebObjects</a> | <a class="reference external" href="http://web.archive.org/web/20051228163749/http://www.next.com/Services/">Services</a> | <a class="reference external" href="http://web.archive.org/web/20051228163749/http://www.next.com/BuyNow/">Buy Now</a> | <a class="reference external" href="http://web.archive.org/web/20051228163749/http://www.next.com/NeXTanswers/">NeXTanswers</a> | <a class="reference external" href="http://web.archive.org/web/20051228163749/http://www.next.com/Search/">Search</a> | <a class="reference external" href="http://web.archive.org/web/20051228163749/http://www.next.com/AboutNeXT/">About NeXT</a></p>
-<hr class="docutils" />
-<p>NeXT sales and product information inquiries? <a class="reference external" href="http://web.archive.org/web/20051228163749/http://www.next.com/AboutNeXT/Feedback.html">Click here</a><br />
-<a class="reference external" href="http://web.archive.org/web/20051228163749/http://www.next.com/Legal/">Copyright</a> 1996 <a class="reference external" href="http://web.archive.org/web/20051228163749/http://www.next.com/">NeXT Software, Inc.</a> <a class="reference external" href="http://web.archive.org/web/20051228163749/http://www.next.com/Legal/">Proprietary Notices.</a></p>
+<p>See ``<a class="reference internal" href="#referring-to-instance-variables">Referring to Instance Variables</a>,’’ earlier in this chapter, for more on when this syntax is permitted.</p>
 </section>
 </section>
 </section>

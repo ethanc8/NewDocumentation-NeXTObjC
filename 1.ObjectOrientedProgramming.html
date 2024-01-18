@@ -295,7 +295,7 @@ struct key *p = malloc(sizeof(struct key) * MAXITEMS);
 <p>But, of course, methods aren’t grouped with instance variables in memory. Memory is allocated for the instance variables of each new object, but there’s no need to allocate memory for methods. All an instance needs is <em>access</em> to its methods, and all instances of the same class share access to the same set of methods. There’s only one copy of the methods in memory, no matter how many instances of the class are created.</p>
 <p>Object-oriented programming languages support the use of file containers for source code, but they also add a logical module to the language–class definitions. As you’d expect, it’s often the case that each class is defined in its own source file–logical modules are matched to container modules.</p>
 <p>In Objective-C, for example, it would be possible to define the part of the Valve class that interacts with WaterPipes in the same file that defines the WaterPipe class, thus creating a container module for WaterPipe-related code and splitting Valve class into more than one file. The Valve class definition would still act as a modular unit within the construction of the program–it would still be a logical module–no matter how many files the source code was located in.</p>
-<p>The mechanisms that make class definitions logical units of the language are discussed in some detail under ``<a class="reference internal" href="#oop.html#935"><span class="xref myst">MECHANISMS OF ABSTRACTION</span></a>’’ below.</p>
+<p>The mechanisms that make class definitions logical units of the language are discussed in some detail under ``<a class="reference internal" href="#mechanisms-of-abstraction">MECHANISMS OF ABSTRACTION</a>’’ below.</p>
 </section>
 <section id="reusability">
 <h3>Reusability<a class="headerlink" href="#reusability" title="Permalink to this heading">#</a></h3>
@@ -326,7 +326,7 @@ struct key *p = malloc(sizeof(struct key) * MAXITEMS);
 </section>
 </section>
 <section id="mechanisms-of-abstraction">
-<h2>Mechanisms of Abstraction<a class="headerlink" href="#mechanisms-of-abstraction" title="Permalink to this heading">#</a></h2>
+<span id="id1"></span><h2>Mechanisms of Abstraction<a class="headerlink" href="#mechanisms-of-abstraction" title="Permalink to this heading">#</a></h2>
 <p>To this point, objects have been introduced as units that embody higher-level abstractions and as coherent role-players within an application. However, they couldn’t be used this way without the support of various language mechanisms. Two of the most important mechanisms are:</p>
 <ul class="simple">
 <li><p>Encapsulation, and</p></li>
@@ -605,14 +605,6 @@ else
 <p>The more software you can borrow from others and incorporate in your own programs, the less you have to do yourself. There’s more software to borrow in an object-oriented programming environment, because the code is more reusable. Collaboration between programmers working in different places for different organizations is enhanced, while the burden of each project is eased.</p>
 <p>Classes and frameworks from an object-oriented library can make substantial contributions to your program. When you program with the OPENSTEP software frameworks, for example, you’re effectively collaborating with the programmers at NeXT; you’re contracting a part of your program, often a substantial part, to them. You can concentrate on what you do best and leave other tasks to the library developer. Your projects can be prototyped faster, completed faster, with less of a collaborative challenge at your own site.</p>
 <p>The increased reusability of object-oriented code also increases its reliability. A class taken from a library is likely to have found its way into a variety of different applications and situations. The more the code has been used, the more likely it is that problems will have been encountered and fixed. Bugs that would have seemed strange and hard to find in your program might already have been tracked down and eliminated.</p>
-<p><a class="reference internal" href="#introobj.html"><span class="xref myst"><img alt="" src="/web/20060116044324im_/http://www.toodarkpark.org/computers/objc/Images/DocsLeftArrow.gif" /></span></a> <a class="reference internal" href="#objctoc.html"><span class="xref myst"><img alt="" src="/web/20060116044324im_/http://www.toodarkpark.org/computers/objc/Images/DocsContents.gif" /></span></a> <a class="reference internal" href="#coreobjc.html"><span class="xref myst"><img alt="" src="/web/20060116044324im_/http://www.toodarkpark.org/computers/objc/Images/DocsRightArrow.gif" /></span></a></p>
-<hr class="docutils" />
-<p>Last Modified: 02:15pm , January 13, 1996</p>
-<hr class="docutils" />
-<p><a class="reference external" href="http://web.archive.org/web/20060116044324/http://www.next.com/HotNews/">Hot News</a> | <a class="reference external" href="http://web.archive.org/web/20060116044324/http://www.next.com/OpenStep/">OpenStep</a> | <a class="reference external" href="http://web.archive.org/web/20060116044324/http://www.next.com/WebObjects/">WebObjects</a> | <a class="reference external" href="http://web.archive.org/web/20060116044324/http://www.next.com/Services/">Services</a> | <a class="reference external" href="http://web.archive.org/web/20060116044324/http://www.next.com/BuyNow/">Buy Now</a> | <a class="reference external" href="http://web.archive.org/web/20060116044324/http://www.next.com/NeXTanswers/">NeXTanswers</a> | <a class="reference external" href="http://web.archive.org/web/20060116044324/http://www.next.com/Search/">Search</a> | <a class="reference external" href="http://web.archive.org/web/20060116044324/http://www.next.com/AboutNeXT/">About NeXT</a></p>
-<hr class="docutils" />
-<p>NeXT sales and product information inquiries? <a class="reference external" href="http://web.archive.org/web/20060116044324/http://www.next.com/AboutNeXT/Feedback.html">Click here</a><br />
-<a class="reference external" href="http://web.archive.org/web/20060116044324/http://www.next.com/Legal/">Copyright</a> 1996 <a class="reference external" href="http://web.archive.org/web/20060116044324/http://www.next.com/">NeXT Software, Inc.</a> <a class="reference external" href="http://web.archive.org/web/20060116044324/http://www.next.com/Legal/">Proprietary Notices.</a></p>
 </section>
 </section>
 </section>

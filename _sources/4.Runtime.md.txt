@@ -6,7 +6,7 @@ Objective-C programs interact with the run-time system at three distinct levels:
 
 -   Through Objective-C source code. For the most part, the run-time system works automatically and behind the scenes. You use it just by writing and compiling Objective-C source code.
     
-    It's up to the compiler to produce the data structures that the run-time system requires and to arrange the run-time function calls that carry out language instructions. The data structures capture information found in class and category definitions and in protocol declarations; they include the class and protocol objects discussed earlier, as well as method selectors, instance variable templates, and other information distilled from source code. The principal run-time function is the one that sends messages, as described under \`\`[HOW MESSAGING WORKS](coreobjc.html#)'' in [Chapter 2](coreobjc.html#). It's invoked by source-code message expressions.
+    It's up to the compiler to produce the data structures that the run-time system requires and to arrange the run-time function calls that carry out language instructions. The data structures capture information found in class and category definitions and in protocol declarations; they include the class and protocol objects discussed earlier, as well as method selectors, instance variable templates, and other information distilled from source code. The principal run-time function is the one that sends messages, as described under \`\`[HOW MESSAGING WORKS](2.Language.md#how-messaging-works)'' in [Chapter 2](2.Language.md). It's invoked by source-code message expressions.
     
 -   Through a method interface defined in the NSObject class. Every object inherits from the NSObject class, so every object has access to the methods it defines. Most NSObject methods interact with the run-time system.
     
@@ -46,7 +46,7 @@ It takes two steps to create an object in Objective-C. You must both:
 -   Dynamically allocate memory for the new object, and 
 -   Initialize the newly allocated memory to appropriate values.
 
-An object isn't fully functional until both steps have been completed. As discussed in [Chapter 2](coreobjc.html#), each step is accomplished by a separate method, but typically in a single line of code:
+An object isn't fully functional until both steps have been completed. As discussed in [Chapter 2](2.Language.md), each step is accomplished by a separate method, but typically in a single line of code:
 
 
 
@@ -152,7 +152,7 @@ This initialization is the responsibility of class-specific instance methods tha
 Every class that declares instance variables must provide an **init...** method to initialize them. The NSObject class declares the **isa** variable and defines an **init** method. However, since **isa** is initialized when memory for a new object is allocated, all NSObject's **init** method does is return **self**. NSObject declares the method mainly to establish the naming convention described above.
 
 
-
+(the-returned-object)=
 ### The Returned Object
 
 An **init...** method normally initializes the instance variables of the receiver, then returns it. It's the responsibility of the method to return an object that can be used without error.
@@ -213,7 +213,7 @@ Every class that declares instance variables must provide an **init...** method 
         return nil;
         }
 
-The message to **super** chains together initialization methods in all inherited classes. Because it comes first, it ensures that superclass variables are initialized before those declared in subclasses. For example, a Rectangle object must be initialized as an NSObject, an Graphic, and a Shape before it's initialized as a Rectangle. (See [Chapter 2](coreobjc.html#) for a figure illustrating the Rectangle inheritance hierarchy.)
+The message to **super** chains together initialization methods in all inherited classes. Because it comes first, it ensures that superclass variables are initialized before those declared in subclasses. For example, a Rectangle object must be initialized as an NSObject, an Graphic, and a Shape before it's initialized as a Rectangle. (See [Chapter 2](2.Language.md) for a figure illustrating the Rectangle inheritance hierarchy.)
 
 The connection between the **initWithName:** method illustrated above and the inherited **init** method it incorporates is diagrammed in the figure below:
 
@@ -308,7 +308,7 @@ Instances created with any of these methods will be deallocated automatically, s
 
 Methods that combine allocation and initialization are particularly valuable if the allocation must somehow be informed by the initialization. For example, if the data for the initialization is taken from a file, and the file might contain enough data to initialize more than one object, it would be impossible to know how many objects to allocate until the file is opened. In this case, you might implement a **listFromFile:** method that takes the name of the file as an argument. It would open the file, see how many objects to allocate, and create a List object large enough to hold all the new objects. It would then allocate and initialize the objects from data in the file, put them in the List, and finally return the List.
 
-It also makes sense to combine allocation and initialization in a single method if you want to avoid the step of blindly allocating memory for a new object that you might not use. As mentioned under \`\`[The Returned Object](runtime.html#930)'' above, an **init...** method might sometimes substitute another object for the receiver. For example, when **initWithName:** is passed a name that's already taken, it might free the receiver and in its place return the object that was previously assigned the name. This means, of course, that an object is allocated and freed immediately without ever being used.
+It also makes sense to combine allocation and initialization in a single method if you want to avoid the step of blindly allocating memory for a new object that you might not use. As mentioned under \`\`[The Returned Object](#the-returned-object)'' above, an **init...** method might sometimes substitute another object for the receiver. For example, when **initWithName:** is passed a name that's already taken, it might free the receiver and in its place return the object that was previously assigned the name. This means, of course, that an object is allocated and freed immediately without ever being used.
 
 If the code that checks whether the receiver should be initialized is placed inside the method that does the allocation instead of inside **init...**, you can avoid the step of allocating a new instance when one isn't needed.
 
@@ -418,7 +418,7 @@ Forwarding addresses most needs that lead programmers to value multiple inherita
 
 Forwarding not only mimics multiple inheritance, it also makes it possible to develop lightweight objects that represent or \`\`cover'' more substantial objects. The surrogate stands in for the other object and funnels messages to it.
 
-The proxy discussed under \`\`[REMOTE MESSAGING](moreobjc.html#)'' in [Chapter 3](moreobjc.html#) is such an object. A proxy takes care of the administrative details of forwarding messages to a remote receiver, making sure argument values are copied and retrieved across the connection, and so on. But it doesn't attempt to do much else; it doesn't duplicate the functionality of the remote object but simply gives the remote object a local address, a place where it can receive messages in another application.
+The proxy discussed under \`\`[REMOTE MESSAGING](3.Extensions.md#remote-messaging)'' in [Chapter 3](3.Extensions.md) is such an object. A proxy takes care of the administrative details of forwarding messages to a remote receiver, making sure argument values are copied and retrieved across the connection, and so on. But it doesn't attempt to do much else; it doesn't duplicate the functionality of the remote object but simply gives the remote object a local address, a place where it can receive messages in another application.
 
 Other kinds of surrogate objects are also possible. Suppose, for example, that you have an object that manipulates a lot of data--perhaps it creates a complicated image or reads the contents of a file on disk. Setting this object up could be time-consuming, so you prefer to do it lazily--when it's really needed or when system resources are temporarily idle. At the same time, you need at least a placeholder for this object in order for the other objects in the application to function properly.
 
@@ -471,18 +471,4 @@ In the OPENSTEP environment, dynamic loading is commonly used to allow applicati
 
 Although there are run-time functions that enable dynamic loading (**objc\_loadModules()** and **objc\_unloadModules()**, defined in **objc/objc-load.h**), OPENSTEP's NSBundle class provides a significantly more convenient interface for dynamic loading--one that's object-oriented and integrated with related services. See the NSBundle class specification in the *Foundation Framework Reference* for information on the NSBundle class and its use.
 
-  
-[![](/web/20051228154442im_/http://www.toodarkpark.org/computers/objc/Images/DocsLeftArrow.gif)](moreobjc.html) [![](/web/20051228154442im_/http://www.toodarkpark.org/computers/objc/Images/DocsContents.gif)](objctoc.html) [![](/web/20051228154442im_/http://www.toodarkpark.org/computers/objc/Images/DocsRightArrow.gif)](summary.html)
 
-------------------------------------------------------------------------
-
-Last Modified: 01:26pm , January 13, 1996
-
-------------------------------------------------------------------------
-
-[Hot News](http://web.archive.org/web/20051228154442/http://www.next.com/HotNews/) \| [OpenStep](http://web.archive.org/web/20051228154442/http://www.next.com/OpenStep/) \| [WebObjects](http://web.archive.org/web/20051228154442/http://www.next.com/WebObjects/) \| [Services](http://web.archive.org/web/20051228154442/http://www.next.com/Services/) \| [Buy Now](http://web.archive.org/web/20051228154442/http://www.next.com/BuyNow/) \| [NeXTanswers](http://web.archive.org/web/20051228154442/http://www.next.com/NeXTanswers/) \| [Search](http://web.archive.org/web/20051228154442/http://www.next.com/Search/) \| [About NeXT](http://web.archive.org/web/20051228154442/http://www.next.com/AboutNeXT/)
-
-------------------------------------------------------------------------
-
-NeXT sales and product information inquiries? [Click here](http://web.archive.org/web/20051228154442/http://www.next.com/AboutNeXT/Feedback.html)  
-[Copyright](http://web.archive.org/web/20051228154442/http://www.next.com/Legal/) 1996 [NeXT Software, Inc.](http://web.archive.org/web/20051228154442/http://www.next.com/) [Proprietary Notices.](http://web.archive.org/web/20051228154442/http://www.next.com/Legal/)

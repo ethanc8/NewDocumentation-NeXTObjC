@@ -169,7 +169,7 @@ Object-oriented programming languages support the use of file containers for sou
 
 In Objective-C, for example, it would be possible to define the part of the Valve class that interacts with WaterPipes in the same file that defines the WaterPipe class, thus creating a container module for WaterPipe-related code and splitting Valve class into more than one file. The Valve class definition would still act as a modular unit within the construction of the program--it would still be a logical module--no matter how many files the source code was located in.
 
-The mechanisms that make class definitions logical units of the language are discussed in some detail under \`\`[MECHANISMS OF ABSTRACTION](oop.html#935)'' below.
+The mechanisms that make class definitions logical units of the language are discussed in some detail under \`\`[MECHANISMS OF ABSTRACTION](#mechanisms-of-abstraction)'' below.
 
 
 
@@ -206,7 +206,7 @@ An object's data is protected and won't be touched by any other part of the prog
 Moreover, because an object's data is hidden, a class can be reimplemented to use a different data structure without affecting its interface. All programs that use the class can pick up the new version without changing any source code; no reprogramming is required.
 
 
-
+(mechanisms-of-abstraction)=
 ## Mechanisms of Abstraction
 
 To this point, objects have been introduced as units that embody higher-level abstractions and as coherent role-players within an application. However, they couldn't be used this way without the support of various language mechanisms. Two of the most important mechanisms are:
@@ -645,19 +645,3 @@ The more software you can borrow from others and incorporate in your own program
 Classes and frameworks from an object-oriented library can make substantial contributions to your program. When you program with the OPENSTEP software frameworks, for example, you're effectively collaborating with the programmers at NeXT; you're contracting a part of your program, often a substantial part, to them. You can concentrate on what you do best and leave other tasks to the library developer. Your projects can be prototyped faster, completed faster, with less of a collaborative challenge at your own site.
 
 The increased reusability of object-oriented code also increases its reliability. A class taken from a library is likely to have found its way into a variety of different applications and situations. The more the code has been used, the more likely it is that problems will have been encountered and fixed. Bugs that would have seemed strange and hard to find in your program might already have been tracked down and eliminated.
-
-  
-[![](/web/20060116044324im_/http://www.toodarkpark.org/computers/objc/Images/DocsLeftArrow.gif)](introobj.html) [![](/web/20060116044324im_/http://www.toodarkpark.org/computers/objc/Images/DocsContents.gif)](objctoc.html) [![](/web/20060116044324im_/http://www.toodarkpark.org/computers/objc/Images/DocsRightArrow.gif)](coreobjc.html)
-
-------------------------------------------------------------------------
-
-Last Modified: 02:15pm , January 13, 1996
-
-------------------------------------------------------------------------
-
-[Hot News](http://web.archive.org/web/20060116044324/http://www.next.com/HotNews/) \| [OpenStep](http://web.archive.org/web/20060116044324/http://www.next.com/OpenStep/) \| [WebObjects](http://web.archive.org/web/20060116044324/http://www.next.com/WebObjects/) \| [Services](http://web.archive.org/web/20060116044324/http://www.next.com/Services/) \| [Buy Now](http://web.archive.org/web/20060116044324/http://www.next.com/BuyNow/) \| [NeXTanswers](http://web.archive.org/web/20060116044324/http://www.next.com/NeXTanswers/) \| [Search](http://web.archive.org/web/20060116044324/http://www.next.com/Search/) \| [About NeXT](http://web.archive.org/web/20060116044324/http://www.next.com/AboutNeXT/)
-
-------------------------------------------------------------------------
-
-NeXT sales and product information inquiries? [Click here](http://web.archive.org/web/20060116044324/http://www.next.com/AboutNeXT/Feedback.html)  
-[Copyright](http://web.archive.org/web/20060116044324/http://www.next.com/Legal/) 1996 [NeXT Software, Inc.](http://web.archive.org/web/20060116044324/http://www.next.com/) [Proprietary Notices.](http://web.archive.org/web/20060116044324/http://www.next.com/Legal/)
